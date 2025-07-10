@@ -1,19 +1,20 @@
 using UnityEngine;
-using DG.Tweening;
-using System.Collections;
 
 public class Melee : MonoBehaviour
 {
-    [SerializeField] private Transform meleeWeapon;
+    [Header("Melee Variables")]
+    [SerializeField] private GameObject slashEffect;
+    [SerializeField] private float meleeAttackDistance;
+    [SerializeField] private Transform attackOrigin;
 
-    //private Vector3 defaultPosition = new(-0.411f, -0.272f, 0.248f);
-    private float defaultPosition = 0.248f;
-    private float attackPosition = 0.687f;
-    //private Vector3 attackPosition = new(-0.411f, -0.272f, 0.687f);
+    private ParticleSystem pS;
+    private Vector3 effectPosition;
 
     private void Awake()
     {
-        //meleeWeapon.transform.position = defaultPosition;
+        pS = slashEffect.GetComponent<ParticleSystem>();
+        Vector3 effectPosition = attackOrigin.position + attackOrigin.forward * meleeAttackDistance;
+        slashEffect.transform.position = effectPosition;
     }
 
     private void Update()
@@ -26,14 +27,17 @@ public class Melee : MonoBehaviour
 
     private void MeleeAttack()
     {
-        meleeWeapon.DOMoveZ(defaultPosition, 0.5f);
-        //If the collider hit something with the tag Enemy it damages it...
-        StartCoroutine(RetractMelee());
-    }
+        slashEffect.SetActive(true);
+        pS.Play();
 
-    IEnumerator RetractMelee()
-    {
-        yield return new WaitForSeconds(0.5f);
-        meleeWeapon.DOMoveZ(attackPosition, 0.5f);
+        RaycastHit hit;
+        if (Physics.Raycast(attackOrigin.position, attackOrigin.forward, out hit, meleeAttackDistance))
+        {
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                Debug.Log("Melee hit an enemy.");
+                slashEffect.SetActive(false);
+            }
+        }
     }
 }
