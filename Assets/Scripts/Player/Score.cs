@@ -15,11 +15,15 @@ public class Score : MonoBehaviour
     [Header("Configuración")]
     [SerializeField] private float scorePerKill;
     [SerializeField] private float multiPerKill;
-    [SerializeField] private float maxScoreVisible; 
+    [SerializeField] private float maxScoreVisible;
+
+    [Header("Referencias")]
+    [SerializeField] private PlayerMovement player;
 
     private float currentScore = 0;
     private float currentMulti = 1;
-    [SerializeField]private int killCount = 0;
+    private int killCount = 0;
+    public int currentPhase = 0;
 
     private void OnEnable()
     {
@@ -66,29 +70,57 @@ public class Score : MonoBehaviour
         if (maxScoreVisible <= 0f) return;
 
         float ratio = Mathf.Clamp01(currentScore / maxScoreVisible);
-
         scoreImage.fillAmount = ratio;
 
-        if (ratio <= 1f / 3f)                                
-        {
-            scoreImage.color = colorFase1;                   
-        }
-        else if (ratio <= 2f / 3f)                          
-        {
-            scoreImage.color = colorFase2;                  
-        }
-        else                                            
-        {
-            scoreImage.color = colorFase3;               
-        }
+        if (ratio < 0.33f) { }
+        else if (ratio < 0.66f)
+            scoreImage.color = colorFase2;       // Fase 1
+        else if (ratio < 0.99f)
+            scoreImage.color = colorFase3;       // Fase 2
+        else
+            scoreImage.color = colorFase3;       // Fase 3 (mismo color u otro si deseas)
 
-        if (multiText != null)
-        {
+        if (multiText)
             multiText.text = $"x{currentMulti:F1}";
+
+        int newPhase;
+        if (ratio < 0.33f) newPhase = 0;
+        else if (ratio < 0.66f) newPhase = 1;
+        else if (ratio < 0.99f) newPhase = 2;
+        else newPhase = 3;
+
+        if (newPhase != currentPhase)
+        {
+            currentPhase = newPhase;
+            ApplyAbilities(currentPhase);
         }
     }
 
-private void Update()
+
+    private void ApplyAbilities(int phase)
+    {
+        switch (phase)
+        {
+            // Fase 0: Sin habilidades
+            case 0:
+                break;
+
+             // Fase 1: Sprint
+            case 1: 
+                break;
+
+            // Fase 2: Sprint + Doble salto
+            case 2: 
+                break;
+
+            // Fase 3: Sprint + Doble salto + Balas explosivas
+            case 3: 
+                Bala.ExplosiveBullets = true;
+                break;
+        }
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
