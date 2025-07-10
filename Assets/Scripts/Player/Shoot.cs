@@ -17,8 +17,10 @@ public class Shoot : MonoBehaviour
     [Header("Bala")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField] private AudioSource bulletAudio;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float lifetime;
+    [SerializeField] private bool isExplosive;
 
     private float nextFireTime = 0f;
     private bool isReloading = false;
