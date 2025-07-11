@@ -1727,6 +1727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 10
   reloadTime: 2
+  shotCooldown: 0.5
   maxAmmo: 40
   currentAmmo: 0
   maxMagazines: 5
@@ -1798,6 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slashEffect: {fileID: 5704454124706147742}
   meleeAttackDistance: 2
+  meleeCooldown: 1
   attackOrigin: {fileID: 524237090}
 --- !u!1 &582210117
 GameObject:

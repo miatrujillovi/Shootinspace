@@ -129,7 +129,6 @@ public class Score : MonoBehaviour
     private void Update()
     {
         timeSinceLastKill += Time.deltaTime;
-        Debug.Log(timeSinceLastKill);
 
         if (timeSinceLastKill >= killTimeout)
         {

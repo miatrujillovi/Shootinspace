@@ -5,10 +5,11 @@ public class Melee : MonoBehaviour
     [Header("Melee Variables")]
     [SerializeField] private GameObject slashEffect;
     [SerializeField] private float meleeAttackDistance;
+    [SerializeField] private float meleeCooldown;
     [SerializeField] private Transform attackOrigin;
 
     private ParticleSystem pS;
-    private Vector3 effectPosition;
+    private float nextMeleeTime = 0f;
 
     private void Awake()
     {
@@ -19,9 +20,10 @@ public class Melee : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time >= nextMeleeTime)
         {
             MeleeAttack();
+            nextMeleeTime = Time.time + meleeCooldown;
         }
     }
 

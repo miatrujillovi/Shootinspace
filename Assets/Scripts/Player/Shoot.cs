@@ -8,6 +8,7 @@ public class Shoot : MonoBehaviour
     [Header("Recarga y tiempo de Disparo")]
     [SerializeField] private float fireRate;
     [SerializeField] private float reloadTime;
+    [SerializeField] private float shotCooldown;
 
     [Header("Municion y Cargadores")]
     [SerializeField] private int maxAmmo;
@@ -49,7 +50,7 @@ public class Shoot : MonoBehaviour
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime && currentAmmo > 0)
         {
             Disparar();
-            nextFireTime = Time.time + 1f / fireRate;
+            nextFireTime = Time.time + shotCooldown;
         }
 
         if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo && currentMagazines > 0)
