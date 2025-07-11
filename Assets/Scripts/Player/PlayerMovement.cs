@@ -87,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void DeactivateSprint()
     {
+        playerSpeed = 3f;
         sprint = false;
     }
 
@@ -97,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void DeactivateDoubleJump()
     {
+        jumpForce = 5f;
         doubleJump = false;
     }
 }

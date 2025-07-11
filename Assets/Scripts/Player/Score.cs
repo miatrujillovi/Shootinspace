@@ -66,6 +66,11 @@ public class Score : MonoBehaviour
         killCount = 0;
         currentMulti = 1;
         currentScore = 0;
+        //Deactivate Boosts
+        player.DeactivateSprint();
+        player.DeactivateDoubleJump();
+        Bala.ExplosiveBullets = false;
+
         UpdateUI();
     }
 

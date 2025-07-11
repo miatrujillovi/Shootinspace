@@ -375,7 +375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4924792, y: 0.48700002}
   m_AnchorMax: {x: 0.507, y: 0.51270366}
-  m_AnchoredPosition: {x: 0.5399456, y: -0.000024795532}
+  m_AnchoredPosition: {x: 0.5399475, y: -0.000024795532}
   m_SizeDelta: {x: -0.0015001297, y: -0.3597002}
   m_Pivot: {x: 0.50000006, y: 0.50000006}
 --- !u!114 &107678711
@@ -5009,8 +5009,8 @@ MonoBehaviour:
   colorFase2: {r: 1, g: 0.901886, b: 0, a: 1}
   colorFase3: {r: 1, g: 0, b: 0, a: 1}
   scorePerKill: 1
-  multiPerKill: 0.125
-  maxScoreVisible: 3
+  multiPerKill: 0.0125
+  maxScoreVisible: 20
   player: {fileID: 524237093}
   currentPhase: 0
 --- !u!4 &1636871704
