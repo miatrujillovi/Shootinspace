@@ -106,11 +106,13 @@ public class Score : MonoBehaviour
                 break;
 
              // Fase 1: Sprint
-            case 1: 
+            case 1:
+                player.ActivateSprint();
                 break;
 
             // Fase 2: Sprint + Doble salto
-            case 2: 
+            case 2:
+                player.ActivateDoubleJump();
                 break;
 
             // Fase 3: Sprint + Doble salto + Balas explosivas

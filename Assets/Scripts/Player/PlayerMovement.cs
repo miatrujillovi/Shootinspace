@@ -9,36 +9,31 @@ public class PlayerMovement : MonoBehaviour
     [Header("Variables for Boost Movement")]
     [SerializeField] private bool sprint;
     [SerializeField] private bool doubleJump;
+    [SerializeField] private float boostedPlayerSpeed;
+    [SerializeField] private float boostedJumpForce;
 
     private Rigidbody rb;
     private Vector3 movement;
     private Vector3 velocity;
+    private bool canDoubleJump;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        sprint = false; doubleJump = false;
+        sprint = false; 
+        doubleJump = false;
     }
 
     //Player Movement Functions
-    [System.Obsolete]
     private void FixedUpdate()
     {
         if (sprint)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                playerSpeed += 5;
-            }
-            else
-            {
-                playerSpeed -= 5;
-            }
+            playerSpeed = boostedPlayerSpeed;
         }
         MovePlayer();
     }
 
-    [System.Obsolete]
     private void MovePlayer()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -47,26 +42,31 @@ public class PlayerMovement : MonoBehaviour
         movement = transform.right * horizontal + transform.forward * vertical;
         movement.Normalize();
 
-        velocity = new Vector3(movement.x * playerSpeed, rb.velocity.y, movement.z * playerSpeed);
-        rb.velocity = velocity;
+        velocity = new Vector3(movement.x * playerSpeed, rb.linearVelocity.y, movement.z * playerSpeed);
+        rb.linearVelocity = velocity;
     }
 
     //Player Jumping Functions
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            if (IsGrounded())
+            {
+                Jump(jumpForce);
+                canDoubleJump = true;
+            }
+            else if (doubleJump && canDoubleJump)
+            {
+                Jump(boostedJumpForce);
+                canDoubleJump = false;
+            }
         }
     }
 
-    private void Jump()
+    private void Jump(float force)
     {
-        if (doubleJump)
-        {
-            //Double Jump Here
-        }
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * force, ForceMode.Impulse);
     }
 
     private bool IsGrounded()
