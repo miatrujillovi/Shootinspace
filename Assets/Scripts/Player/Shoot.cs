@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using TMPro;
 
 public class Shoot : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class Shoot : MonoBehaviour
     [SerializeField] private float lifetime;
     [SerializeField] private bool isExplosive;
 
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI currentAmmoTXT;
+    [SerializeField] private TextMeshProUGUI ammoAmountTXT;
+
     private float nextFireTime = 0f;
     private bool isReloading = false;
 
@@ -38,6 +43,8 @@ public class Shoot : MonoBehaviour
     {
         if (isReloading)
             return;
+
+        UpdateUI();
 
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime && currentAmmo > 0)
         {
@@ -83,5 +90,11 @@ public class Shoot : MonoBehaviour
             }
         }
         isReloading = false;
+    }
+
+    private void UpdateUI()
+    {
+        currentAmmoTXT.text = currentAmmo.ToString();
+        ammoAmountTXT.text = "/" + maxAmmo.ToString();
     }
 }

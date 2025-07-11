@@ -25,6 +25,9 @@ public class Score : MonoBehaviour
     private int killCount = 0;
     public int currentPhase = 0;
 
+    private float timeSinceLastKill = 0f;
+    private const float killTimeout = 20f;
+
     private void OnEnable()
     {
         EnemyEvents.OnEnemyDeath += OnEnemyDeath;
@@ -34,7 +37,6 @@ public class Score : MonoBehaviour
     {
         EnemyEvents.OnEnemyDeath -= OnEnemyDeath;
     }
-
 
     void Start()
     {
@@ -53,6 +55,8 @@ public class Score : MonoBehaviour
 
         float scoreToAdd = scorePerKill * currentMulti;
         currentScore += scoreToAdd;
+
+        timeSinceLastKill = 0f; //Reseting timer
 
         UpdateUI();
     }
@@ -115,7 +119,7 @@ public class Score : MonoBehaviour
                 player.ActivateDoubleJump();
                 break;
 
-            // Fase 3: Sprint + Doble salto + Balas explosivas
+            // Fase 3: Sprint + Doble salto + Balas explosivasww
             case 3: 
                 Bala.ExplosiveBullets = true;
                 break;
@@ -124,9 +128,18 @@ public class Score : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        timeSinceLastKill += Time.deltaTime;
+        Debug.Log(timeSinceLastKill);
+
+        if (timeSinceLastKill >= killTimeout)
+        {
+            ResetKill();
+            timeSinceLastKill = 0f;
+        }
+
+        /*if (Input.GetKeyDown(KeyCode.P))
         {
             AddKill();
-        }
+        }*/
     }
 }
