@@ -13,11 +13,11 @@ public class Bala : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.TryGetComponent<IDamageable>(out var target))
-            target.TomarDano(damage);
+            target.TakeDamage(damage);
 
         if (ExplosiveBullets) SpawnExplosionTrigger();
 
-        Destroy(gameObject);  
+        Destroy(gameObject);
     }
 
     private void SpawnExplosionTrigger()
@@ -28,14 +28,14 @@ public class Bala : MonoBehaviour
         {
             if (col.TryGetComponent<IDamageable>(out var target))
             {
-                target.TomarDano(damage);
+                target.TakeDamage(damage);
             }
         }
 
         if (explosionVFX != null)
         {
             GameObject vfxInstance = Instantiate(explosionVFX, transform.position, Quaternion.identity);
-            Destroy(vfxInstance, 0.25f); 
+            Destroy(vfxInstance, 0.25f);
         }
     }
 }

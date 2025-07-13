@@ -15,7 +15,7 @@ public class ExplosionTrigger : MonoBehaviour
     {
         if (other.TryGetComponent<IDamageable>(out var target))
         {
-            target.TomarDano(damage);
+            target.TakeDamage(damage);
         }
     }
 }

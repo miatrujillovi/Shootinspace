@@ -1,4 +1,9 @@
+using UnityEngine;
+
 public interface IDamageable
 {
-    void TomarDano(float amount);
+
+    void TakeDamage(float amount);
+
+    void TakeDamage(float amount, Vector3 hitPoint);
 }
