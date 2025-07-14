@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 2098804772100235865}
   - component: {fileID: 5574393317371539051}
   - component: {fileID: 1053184008620375526}
+  - component: {fileID: 6857882560186648006}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -616,12 +617,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c24beae249cca428485b41c7b08d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 3
-  jumpForce: 5
-  sprint: 0
-  doubleJump: 0
-  boostedPlayerSpeed: 8
-  boostedJumpForce: 10
+  playerSpeed: 8
+  jumpForce: 6
 --- !u!114 &1053184008620375526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +641,20 @@ MonoBehaviour:
   parryStartSFX: {fileID: 0}
   parryPerfectSFX: {fileID: 0}
   parrySlashVFX: {fileID: 0}
+--- !u!114 &6857882560186648006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8658620450730286438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf25fc6e16e8df8409dc7ace15b8dd06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  hpFiller: {fileID: 0}
 --- !u!1001 &4378748852042044050
 PrefabInstance:
   m_ObjectHideFlags: 0
