@@ -5,12 +5,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Variables for Normal Movement")]
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpForce;
-    [Space]
-    [Header("Variables for Boost Movement")]
-    [SerializeField] private bool sprint;
-    [SerializeField] private bool doubleJump;
-    [SerializeField] private float boostedPlayerSpeed;
-    [SerializeField] private float boostedJumpForce;
+
+    //[Header("Variables for Boost Movement")]
+    //[SerializeField] private bool sprint;
+    //[SerializeField] private bool doubleJump;
+    //[SerializeField] private float boostedPlayerSpeed;
+    //[SerializeField] private float boostedJumpForce;
 
     private Rigidbody rb;
     private Vector3 movement;
@@ -20,17 +20,17 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        sprint = false; 
-        doubleJump = false;
+        //sprint = false; 
+        //doubleJump = false;
     }
 
     //Player Movement Functions
     private void FixedUpdate()
     {
-        if (sprint)
+        /*if (sprint)
         {
             playerSpeed = boostedPlayerSpeed;
-        }
+        }*/
         MovePlayer();
     }
 
@@ -56,11 +56,15 @@ public class PlayerMovement : MonoBehaviour
                 Jump(jumpForce);
                 canDoubleJump = true;
             }
-            else if (doubleJump && canDoubleJump)
+            else if (canDoubleJump)
+            {
+                Jump(jumpForce);
+            }
+            /*else if (doubleJump && canDoubleJump)
             {
                 Jump(boostedJumpForce);
                 canDoubleJump = false;
-            }
+            }*/
         }
     }
 
@@ -80,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Boost Activation Functions
-    public void ActivateSprint()
+    /*public void ActivateSprint()
     {
         sprint = true;
     }
@@ -100,5 +104,5 @@ public class PlayerMovement : MonoBehaviour
     {
         jumpForce = 5f;
         doubleJump = false;
-    }
+    }*/
 }

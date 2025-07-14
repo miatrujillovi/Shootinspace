@@ -67,8 +67,8 @@ public class Score : MonoBehaviour
         currentMulti = 1;
         currentScore = 0;
         //Deactivate Boosts
-        player.DeactivateSprint();
-        player.DeactivateDoubleJump();
+        /*player.DeactivateSprint();
+        player.DeactivateDoubleJump();*/
         Bala.ExplosiveBullets = false;
 
         UpdateUI();
@@ -116,12 +116,12 @@ public class Score : MonoBehaviour
 
              // Fase 1: Sprint
             case 1:
-                player.ActivateSprint();
+                //player.ActivateSprint();
                 break;
 
             // Fase 2: Sprint + Doble salto
             case 2:
-                player.ActivateDoubleJump();
+                //player.ActivateDoubleJump();
                 break;
 
             // Fase 3: Sprint + Doble salto + Balas explosivasww

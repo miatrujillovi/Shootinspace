@@ -54,14 +54,14 @@ public class AttackState : EnemyState
 
     bool Ranged(Enemy e)
     {
-        e.animator.SetTrigger("Shoot");
+        //e.animator.SetTrigger("Shoot");
         e.shooter.Shoot(e.player.position);
         return true;
     }
 
     bool Melee(Enemy e)
     {
-        e.animator.SetTrigger("Melee");
+        //e.animator.SetTrigger("Melee");
         e.melee.ActivateHitbox();   // Tu método para habilitar collider/daño
         return true;
     }
