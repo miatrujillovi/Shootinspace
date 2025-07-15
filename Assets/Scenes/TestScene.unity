@@ -729,8 +729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacdb1b46ca2b6942af8bd7bd7b188dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRadius: 15
-  lostTargetDelay: 10
+  sightRadius: 5
+  lostTargetDelay: 1
   vidaMax: 100
   vidaActual: 0
   meleeRange: 0
@@ -740,6 +740,7 @@ MonoBehaviour:
   - {fileID: 1769106359}
   animator: {fileID: 281483962}
   player: {fileID: 466417349410404177}
+  stuned: 0
   shooter: {fileID: 917260667}
   cooldown: 1.2
 --- !u!95 &281483962
@@ -1556,7 +1557,7 @@ Transform:
   m_GameObject: {fileID: 1007450979}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.57, y: 0.77, z: 7.15}
+  m_LocalPosition: {x: -4.59, y: 0.77, z: -3.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2016,7 +2017,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -2082,7 +2083,7 @@ Transform:
   m_GameObject: {fileID: 1723264374}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.36, y: 1.46, z: -6.53}
+  m_LocalPosition: {x: -1.36, y: 1.846, z: -6.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2150,9 +2151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bd0d2c1d8f0af4aa6f912fe4256b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRadius: 10
+  sightRadius: 15
   lostTargetDelay: 100
-  vidaMax: 100
+  vidaMax: 40
   vidaActual: 0
   meleeRange: 2
   rangedRange: 0
@@ -2161,6 +2162,7 @@ MonoBehaviour:
   - {fileID: 1007450980}
   animator: {fileID: 1723264383}
   player: {fileID: 466417349410404177}
+  stuned: 0
   melee: {fileID: 254549802}
   cooldown: 1
 --- !u!95 &1723264383
