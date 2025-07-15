@@ -12,7 +12,9 @@ public class MeleeEnemy : EnemyBase
     public override float DoAttack()
     {
         //animator.SetTrigger("Melee");
+
         melee.ActivateHitbox();
         return cooldown;
+        
     }
 }
