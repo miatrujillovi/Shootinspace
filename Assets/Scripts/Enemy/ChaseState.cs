@@ -4,30 +4,24 @@ public class ChaseState : EnemyState
 {
     float _lostTimer;
 
-    public override void Enter(Enemy e)
+    public override void Enter(EnemyBase e)
     {
         e.agent.isStopped = false;
         _lostTimer = 0f;
     }
 
-    public override void Tick(Enemy e)
+    public override void Tick(EnemyBase e)
     {
-        float dist = Vector3.Distance(e.transform.position, e.player.position);
-
-        // Si está en rango de ataque, cambiar a Attack
-        bool meleeReady = (e.attackMode != Enemy.AttackMode.Ranged) && dist <= e.meleeRange;
-        bool rangedReady = (e.attackMode != Enemy.AttackMode.Melee) && dist <= e.rangedRange;
-
-        if (meleeReady || rangedReady)
+        if (e.IsInAttackRange())
         {
             e.SwitchState(e.attack);
             return;
         }
 
-        // Mantener la persecución
         e.agent.destination = e.player.position;
 
-        // Player perdido
+        float dist = Vector3.Distance(e.transform.position, e.player.position);
+
         if (dist > e.sightRadius) _lostTimer += Time.deltaTime;
         else _lostTimer = 0f;
 

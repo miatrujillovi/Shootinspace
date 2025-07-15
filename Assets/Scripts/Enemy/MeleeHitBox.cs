@@ -10,7 +10,7 @@ public class MeleeHitbox : ParryableHitbox
     [SerializeField] private float activeTime = 0.15f;
     [SerializeField] private LayerMask targetMask;
 
-    private Enemy _owner;
+    private EnemyBase _owner;
 
     Collider _col;
 
@@ -19,7 +19,7 @@ public class MeleeHitbox : ParryableHitbox
         _col = GetComponent<Collider>();
         _col.isTrigger = true;
         _col.enabled = false;
-        _owner = GetComponentInParent<Enemy>();
+        _owner = GetComponentInParent<EnemyBase>();
     }
 
 

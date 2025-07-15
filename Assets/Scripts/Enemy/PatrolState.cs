@@ -4,28 +4,26 @@ public class PatrolState : EnemyState
 {
     int _nextPoint;
 
-    public override void Enter(Enemy e)
+    public override void Enter(EnemyBase e)
     {
         if (e.patrolPoints.Length == 0) return;
         e.agent.isStopped = false;
         MoveToNext(e);
     }
 
-    public override void Tick(Enemy e)
+    public override void Tick(EnemyBase e)
     {
-        // Transition: player a la vista
-        if (Vector3.Distance(e.transform.position, e.player.position) <= e.sightRadius)
+        if (e.IsInAttackRange())          
         {
-            e.SwitchState(e.chase);
+            e.SwitchState(e.attack);
             return;
         }
 
-        // Llegó al punto -> ir al siguiente
         if (!e.agent.pathPending && e.agent.remainingDistance <= 0.2f)
             MoveToNext(e);
     }
 
-    void MoveToNext(Enemy e)
+    void MoveToNext(EnemyBase e)
     {
         if (e.patrolPoints.Length == 0) return;
         e.agent.destination = e.patrolPoints[_nextPoint].position;
