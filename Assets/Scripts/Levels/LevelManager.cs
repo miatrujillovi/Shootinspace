@@ -1,25 +1,30 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    [SerializeField] private Transform[] levelStartLocation;
+    [SerializeField] private Vector3[] levelStartLocation;
     [SerializeField] private Transform player;
     [SerializeField] private RectTransform screenTransition;
 
+    [HideInInspector] public bool isFuelUnlocked = false;
+    private int enemiesRemaining;
     private int recoveredFuel;
     private int currentLevel;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
+
+        recoveredFuel = 0;
         currentLevel = 1;
-        player = levelStartLocation[0];
+        //NextLevel(currentLevel);
     }
 
+    //When player takes the fuel on the level
     public void FuelRecovered()
     {
         recoveredFuel++;
@@ -27,15 +32,23 @@ public class LevelManager : MonoBehaviour
         NextLevel(currentLevel);
     }
 
+    //Function to change things onto NextLevel
     public void NextLevel(int _nextLevel)
     {
         switch (_nextLevel)
         {
+            case 1:
+                //Logic for First Level
+                LevelTransition(levelStartLocation[0]);
+                break;
+
             case 2:
+                //Logic for Second Level
                 LevelTransition(levelStartLocation[1]);
                 break;
 
             case 3:
+                //Logic for Third Level
                 LevelTransition(levelStartLocation[2]);
                 break;
 
@@ -45,18 +58,25 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    //Screen Transition to Move player to the next Level
+    public void LevelTransition(Vector3 newPosition)
     {
-        LevelTransition(levelStartLocation[1]);
+        screenTransition.DOScale(Vector3.one * 3f, 1.3f).SetEase(Ease.InQuad).OnComplete(() =>
+        {
+
+            player.DOMove(newPosition, 0.5f);
+            screenTransition.DOScale(Vector3.zero, 1.3f).SetEase(Ease.OutQuad);
+        });
     }
 
-    public void LevelTransition(Transform newPosition)
+    public void OnEnemyDefeated()
     {
-        screenTransition.DOScale(Vector3.one * 3f, 0.5f).SetEase(Ease.InQuad).OnComplete(() =>
+        enemiesRemaining--;
+
+        if (enemiesRemaining <= 0)
         {
-            player.position = newPosition.position;
-            screenTransition.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutQuad);
-        });
+            isFuelUnlocked = true;
+        }
     }
 
     private void Update()

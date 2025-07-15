@@ -6,7 +6,10 @@ public class FuelTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            LevelManager.Instance.FuelRecovered();
+            if (LevelManager.Instance.isFuelUnlocked)
+            {
+                LevelManager.Instance.FuelRecovered();
+            }
         }
     }
 }
