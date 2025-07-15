@@ -2,107 +2,50 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Variables for Normal Movement")]
+    [Header("Movement Variables")]
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpForce;
 
-    //[Header("Variables for Boost Movement")]
-    //[SerializeField] private bool sprint;
-    //[SerializeField] private bool doubleJump;
-    //[SerializeField] private float boostedPlayerSpeed;
-    //[SerializeField] private float boostedJumpForce;
-
-    private Rigidbody rb;
-    private Vector3 movement;
+    private CharacterController characterController;
     private Vector3 velocity;
-    private bool canDoubleJump;
+    private bool isGrounded;
+    private float gravity = -9.81f;
+    private float fallMultiplier = 2.5f;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        //sprint = false; 
-        //doubleJump = false;
+        characterController = GetComponent<CharacterController>();
     }
 
-    //Player Movement Functions
-    private void FixedUpdate()
+    private void Update()
     {
-        /*if (sprint)
-        {
-            playerSpeed = boostedPlayerSpeed;
-        }*/
-        MovePlayer();
-    }
+        isGrounded = characterController.isGrounded;
 
-    private void MovePlayer()
-    {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        movement = transform.right * horizontal + transform.forward * vertical;
-        movement.Normalize();
+        Vector3 move = transform.right * horizontal + transform.forward * vertical;
+        characterController.Move(move.normalized * playerSpeed * Time.deltaTime);
 
-        velocity = new Vector3(movement.x * playerSpeed, rb.linearVelocity.y, movement.z * playerSpeed);
-        rb.linearVelocity = velocity;
-    }
-
-    //Player Jumping Functions
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded && velocity.y < 0)
         {
-            if (IsGrounded())
-            {
-                Jump(jumpForce);
-                canDoubleJump = true;
-            }
-            else if (canDoubleJump)
-            {
-                Jump(jumpForce);
-            }
-            /*else if (doubleJump && canDoubleJump)
-            {
-                Jump(boostedJumpForce);
-                canDoubleJump = false;
-            }*/
+            velocity.y = -2f;
         }
-    }
 
-    private void Jump(float force)
-    {
-        rb.AddForce(Vector3.up * force, ForceMode.Impulse);
-    }
-
-    private bool IsGrounded()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.1f))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            return hit.collider.CompareTag("Ground");
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         }
-        return false;
-    }
 
-    //Boost Activation Functions
-    /*public void ActivateSprint()
-    {
-        sprint = true;
-    }
+        if (velocity.y < 0)
+        {
+            velocity.y += gravity * fallMultiplier * Time.deltaTime;
+        } 
+        else
+        {
+            velocity.y += gravity * Time.deltaTime;
+        }
 
-    public void DeactivateSprint()
-    {
-        playerSpeed = 3f;
-        sprint = false;
+        characterController.Move(velocity * Time.deltaTime);
     }
-
-    public void ActivateDoubleJump()
-    {
-        doubleJump = true;
-    }
-
-    public void DeactivateDoubleJump()
-    {
-        jumpForce = 5f;
-        doubleJump = false;
-    }*/
 }

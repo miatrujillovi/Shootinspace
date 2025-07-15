@@ -3,7 +3,12 @@ guid: c9e83e5ab9379234b8df2ebedfefed11
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlantaCuatro
+    second: {fileID: 2100000, guid: 7d03f1c9c6356084e890a1b25ae21931, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

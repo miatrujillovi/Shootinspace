@@ -3,7 +3,12 @@ guid: aea49fcb371e99b408de2d8a71d10b06
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glowing_plants
+    second: {fileID: 2100000, guid: 097a39d78c155ab48a3ea7a8acbbdbd4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

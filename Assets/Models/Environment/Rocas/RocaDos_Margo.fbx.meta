@@ -3,7 +3,12 @@ guid: 8a61aaae32123194f8ef2dfd10397db3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RocaDos
+    second: {fileID: 2100000, guid: 16d99f6d9f03a2840bfc740fcffada8c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

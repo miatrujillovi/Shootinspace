@@ -3,7 +3,12 @@ guid: e6dc6eaed1ccfce4181d623f97920168
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RocaTres
+    second: {fileID: 2100000, guid: bf782f48fabaebf498378dd174b31754, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

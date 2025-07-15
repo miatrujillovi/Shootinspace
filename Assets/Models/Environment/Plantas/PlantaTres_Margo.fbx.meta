@@ -3,7 +3,12 @@ guid: 9ccb2e0f8a084a54ba338151aeff7688
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlantaTres
+    second: {fileID: 2100000, guid: 01381e2196ee6b848b8c8c571a0ef0fe, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

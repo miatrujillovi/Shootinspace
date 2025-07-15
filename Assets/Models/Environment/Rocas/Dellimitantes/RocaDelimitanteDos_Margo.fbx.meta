@@ -3,7 +3,12 @@ guid: 3fed2d2fff0d2eb42bb01d3a021ed47e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PiedrDelimitanteDos
+    second: {fileID: 2100000, guid: 27075ca815e18e445bb156e3d156b81e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
