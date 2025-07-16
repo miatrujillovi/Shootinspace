@@ -9,7 +9,7 @@ public class Health : MonoBehaviour, IDamageable
     [Header("References for UI")]
     [SerializeField] private Image hpFiller;
 
-    private float currentHealth;
+    [SerializeField] private float currentHealth;
 
     private void Awake()
     {
@@ -18,14 +18,11 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount)
     {
-        if (currentHealth > 0f)
-        {
-            currentHealth -= amount;
-            hpFiller.fillAmount = currentHealth;
-        }
-        else
-        {
-            PlayerDeath();
+        currentHealth -= amount;
+        hpFiller.fillAmount = currentHealth / maxHealth;
+        Debug.Log($"Player took {amount} damage, current health: {currentHealth}");
+        if (currentHealth <= 0) {
+            PlayerDeath(); 
         }
     }
 

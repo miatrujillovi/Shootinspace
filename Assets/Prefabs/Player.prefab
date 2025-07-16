@@ -437,6 +437,8 @@ GameObject:
   - component: {fileID: 5574393317371539051}
   - component: {fileID: 1053184008620375526}
   - component: {fileID: 6857882560186648006}
+  - component: {fileID: 4265558581124673714}
+  - component: {fileID: 7801726469975685957}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -618,7 +620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 8
-  jumpForce: 6
+  jumpForce: 2.5
 --- !u!114 &1053184008620375526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +657,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   hpFiller: {fileID: 0}
+  currentHealth: 0
+--- !u!143 &4265558581124673714
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8658620450730286438}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &7801726469975685957
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8658620450730286438}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.65
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4378748852042044050
 PrefabInstance:
   m_ObjectHideFlags: 0

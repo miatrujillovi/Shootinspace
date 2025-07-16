@@ -38,15 +38,23 @@ public class MeleeHitbox : ParryableHitbox
 
     void OnTriggerEnter(Collider other)
     {
-        if ((targetMask.value & (1 << other.gameObject.layer)) == 0) return;
+        Debug.Log($"Entró en el trigger con: {other.name}");
+
+        if ((targetMask.value & (1 << other.gameObject.layer)) == 0)
+        {
+            Debug.Log("No es un objetivo válido.");
+            return;
+        }
 
         if (other.TryGetComponent<IDamageable>(out var target))
         {
+            Debug.Log("Haciendo daño al objetivo.");
             target.TakeDamage(damage, transform.position);
         }
 
         _col.enabled = false;
     }
+
 
     public override void OnParried(Vector3 dir, GameObject source, bool perfect)
     {

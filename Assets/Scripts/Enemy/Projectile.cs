@@ -5,7 +5,7 @@ public class Projectile : ParryableHitbox
 {
     [SerializeField] private float lifeTime = 4f;
     Rigidbody _rb;
-    float _damage;
+    [SerializeField] private float _damage;
     GameObject _owner;
 
     void Awake() => _rb = GetComponent<Rigidbody>();

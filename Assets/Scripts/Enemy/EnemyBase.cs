@@ -24,6 +24,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public bool stuned;
 
     protected EnemyState _current;
+    private bool isJumping;
     public readonly PatrolState patrol = new PatrolState();
     public readonly ChaseState chase = new ChaseState();
     public readonly AttackState attack = new AttackState();
@@ -38,7 +39,16 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         SwitchState(patrol);
     }
 
-    protected virtual void Update() => _current?.Tick(this);
+    protected virtual void Update()
+    {
+        if (agent.isOnOffMeshLink && !isJumping)
+        {
+            StartCoroutine(HandleJump(agent.currentOffMeshLinkData));
+        }
+
+        _current?.Tick(this);
+    }
+
 
     public void SwitchState(EnemyState next)
     {
@@ -64,6 +74,36 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
+    // Corrutinas
+
+    private IEnumerator HandleJump(OffMeshLinkData data)
+    {
+        isJumping = true;
+        agent.isStopped = true;
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = data.endPos + Vector3.up * 0.5f;
+
+        float duration = 0.5f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            float height = Mathf.Sin(Mathf.PI * t) * 1.5f; 
+            transform.position = Vector3.Lerp(startPos, endPos, t) + Vector3.up * height;
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPos;
+        agent.CompleteOffMeshLink();
+        agent.isStopped = false;
+        isJumping = false;
+    }
+
+
     public virtual IEnumerator stunCoroutine()
     {
         agent.speed = 0;
@@ -74,6 +114,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         stuned = false;
         Debug.Log("Ya no esta aturdido el enemigo");
     }
+
+    // ------------------
 
     public virtual void OnCollisionEnter(Collision col)
     {

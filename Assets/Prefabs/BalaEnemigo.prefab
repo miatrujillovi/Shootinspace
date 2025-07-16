@@ -155,3 +155,4 @@ MonoBehaviour:
   parrySFX: {fileID: 0}
   spawnTime: 1
   lifeTime: 2.5
+  _damage: 10
