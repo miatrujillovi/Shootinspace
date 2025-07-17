@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1200788319127400676}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.682}
+  m_LocalPosition: {x: 0, y: 0, z: 0.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3807749397525843333}
   m_Layer: 0
   m_Name: EnemigoDistancia
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -236,7 +236,6 @@ MonoBehaviour:
   meleeRange: 0
   rangedRange: 10
   agent: {fileID: 2355164292322908722}
-  patrolPoints: []
   animator: {fileID: 597767829196511121}
   player: {fileID: 0}
   floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
@@ -350,7 +349,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,12 +11,11 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public float vidaActual;
 
     [Header("Rangos (Los que uses)")]
-    public float meleeRange = 2f;
-    public float rangedRange = 8f;
+    public float meleeRange;
+    public float rangedRange;
 
     [Header("Refs")]
     public NavMeshAgent agent;
-    public Transform[] patrolPoints;
     public Animator animator;
     public Transform player;
     [SerializeField] private GameObject floatingTextPrefab;
@@ -29,7 +27,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected EnemyState _current;
     private bool isJumping;
-    public readonly PatrolState patrol = new PatrolState();
     public readonly ChaseState chase = new ChaseState();
     public readonly AttackState attack = new AttackState();
 
@@ -42,29 +39,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        GameObject initialPatrolPoint = new GameObject("PatrolPoint_" + gameObject.name);
-        initialPatrolPoint.transform.position = transform.position;
-        initialPatrolPoint.transform.SetParent(transform); 
-
-        if (patrolPoints == null || patrolPoints.Length == 0)
-        {
-            patrolPoints = new Transform[1];
-            patrolPoints[0] = initialPatrolPoint.transform;
-        }
-        else
-        {
-            Transform[] newPatrolPoints = new Transform[patrolPoints.Length + 1];
-            newPatrolPoints[0] = initialPatrolPoint.transform;
-            for (int i = 0; i < patrolPoints.Length; i++)
-            {
-                newPatrolPoints[i + 1] = patrolPoints[i];
-            }
-            patrolPoints = newPatrolPoints;
-        }
-
-        SwitchState(patrol);
+        SwitchState(chase);
     }
-
 
     protected virtual void Update()
     {
@@ -74,8 +50,18 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
 
         _current?.Tick(this);
-    }
+        if (this is HybridEnemy hybrid)
+        {
+            hybrid.TickAttackTimer(Time.deltaTime);
 
+            if (!hybrid.HasAttacked && hybrid.TimeSinceLastAttack >= hybrid.ModeTimeout)
+            {
+                Debug.Log("No ha atacado en 5 segundos, cambiando modo...");
+                hybrid.ForceRecalculateAttackMode();
+            }
+        }
+
+    }
 
     public void SwitchState(EnemyState next)
     {
@@ -95,6 +81,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             vidaActual = vidaMax / 2;
         }
     }
+
     public virtual void TakeDamage(float amount, Vector3 _) => TakeDamage(amount);
 
     private void ShowDamageText(float amount)
@@ -127,7 +114,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         while (elapsed < duration)
         {
             float t = elapsed / duration;
-            float height = Mathf.Sin(Mathf.PI * t) * 1.5f; 
+            float height = Mathf.Sin(Mathf.PI * t) * 1.5f;
             transform.position = Vector3.Lerp(startPos, endPos, t) + Vector3.up * height;
 
             elapsed += Time.deltaTime;
@@ -139,7 +126,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         agent.isStopped = false;
         isJumping = false;
     }
-
 
     public virtual IEnumerator stunCoroutine()
     {
@@ -158,29 +144,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public virtual void OnCollisionEnter(Collision col)
     {
-        if (stuned)
+        if (stuned && col.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
-            if (col.gameObject.CompareTag("Player"))
-            {
-                if (Input.GetKey(KeyCode.E))
-                {
-                    Morir();
-                }
-            }
+            Morir();
         }
     }
 
     public virtual void OnCollisionStay(Collision col)
     {
-        if (stuned)
+        if (stuned && col.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
-            if (col.gameObject.CompareTag("Player"))
-            {
-                if (Input.GetKey(KeyCode.E))
-                {
-                    Morir();
-                }
-            }
+            Morir();
         }
     }
 

@@ -6,12 +6,34 @@ public class AttackState : EnemyState
 
     public override void Enter(EnemyBase e)
     {
+        if (e.stuned)
+        {
+            e.SwitchState(e.chase);
+            return;
+        }
+
         e.agent.isStopped = true;
         _cooldown = 0f;
     }
 
     public override void Tick(EnemyBase e)
     {
+        if (e.stuned)
+        {
+            e.SwitchState(e.chase);
+            return;
+        }
+
+        if (e is HybridEnemy hybrid)
+        {
+            hybrid.TickAttackTimer(Time.deltaTime);
+
+            if (!hybrid.HasAttacked && hybrid.TimeSinceLastAttack >= hybrid.ModeTimeout)
+            {
+                hybrid.ForceRecalculateAttackMode();
+            }
+        }
+
         Vector3 dir = e.player.position - e.transform.position;
         dir.y = 0f;
         if (dir != Vector3.zero)
@@ -24,7 +46,7 @@ public class AttackState : EnemyState
 
         if (e.IsInAttackRange())
         {
-            _cooldown = Mathf.Max(0.1f, e.DoAttack()); 
+            _cooldown = Mathf.Max(0.1f, e.DoAttack());
         }
         else
         {
@@ -32,5 +54,11 @@ public class AttackState : EnemyState
         }
     }
 
-    public override void Exit(EnemyBase e) => e.agent.isStopped = false;
+    public override void Exit(EnemyBase e)
+    {
+        e.agent.isStopped = false;
+
+        if (e is HybridEnemy h)
+            h.PrepareForNextAttackCycle();
+    }
 }

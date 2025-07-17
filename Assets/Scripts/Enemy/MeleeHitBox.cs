@@ -11,6 +11,7 @@ public class MeleeHitbox : ParryableHitbox
     [SerializeField] private LayerMask targetMask;
 
     private EnemyBase _owner;
+    private GameObject owner;
 
     Collider _col;
 
@@ -20,6 +21,7 @@ public class MeleeHitbox : ParryableHitbox
         _col.isTrigger = true;
         _col.enabled = false;
         _owner = GetComponentInParent<EnemyBase>();
+        owner = transform.root.gameObject;
     }
 
 
@@ -40,12 +42,21 @@ public class MeleeHitbox : ParryableHitbox
     {
         Debug.Log($"Entró en el trigger con: {other.name}");
 
+        // Ignorar si es el dueño (por jerarquía)
+        if (other.transform.root.gameObject == owner)
+        {
+            Debug.Log("Es el dueño (root), ignorando.");
+            return;
+        }
+
+        // Verificar que esté en la capa correcta
         if ((targetMask.value & (1 << other.gameObject.layer)) == 0)
         {
             Debug.Log("No es un objetivo válido.");
             return;
         }
 
+        // Intentar aplicar daño
         if (other.TryGetComponent<IDamageable>(out var target))
         {
             Debug.Log("Haciendo daño al objetivo.");
@@ -54,6 +65,7 @@ public class MeleeHitbox : ParryableHitbox
 
         _col.enabled = false;
     }
+
 
 
     public override void OnParried(Vector3 dir, GameObject source, bool perfect)

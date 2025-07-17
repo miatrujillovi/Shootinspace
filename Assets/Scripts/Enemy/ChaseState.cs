@@ -6,6 +6,9 @@ public class ChaseState : EnemyState
 
     public override void Enter(EnemyBase e)
     {
+        if (e is HybridEnemy hybrid)
+            hybrid.PrepareForNextAttackCycle();
+
         e.agent.isStopped = false;
         _lostTimer = 0f;
     }
@@ -26,6 +29,6 @@ public class ChaseState : EnemyState
         else _lostTimer = 0f;
 
         if (_lostTimer >= e.lostTargetDelay)
-            e.SwitchState(e.patrol);
+            e.SwitchState(e.chase);
     }
 }

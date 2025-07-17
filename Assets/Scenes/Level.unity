@@ -18030,11 +18030,11 @@ MonoBehaviour:
   - prefab: {fileID: 3383899493014809546, guid: 7065deca2428c8b408da42eed332e278, type: 3}
     weight: 40
   - prefab: {fileID: 6679693313802375805, guid: 9ba5be4b17092f54782947aeb53a3ccb, type: 3}
-    weight: 5
+    weight: 20
   - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
-    weight: 55
+    weight: 40
   center: {x: 271.315, y: 0.546, z: 19.054}
-  spawnRadius: 50
+  spawnRadius: 25
   maxNavSampleDistance: 10
   spawnInterval: 10
   maxEnemies: 3
@@ -19366,14 +19366,14 @@ MonoBehaviour:
   - prefab: {fileID: 3383899493014809546, guid: 7065deca2428c8b408da42eed332e278, type: 3}
     weight: 40
   - prefab: {fileID: 6679693313802375805, guid: 9ba5be4b17092f54782947aeb53a3ccb, type: 3}
-    weight: 20
+    weight: 5
   - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
-    weight: 40
+    weight: 55
   center: {x: 20.45, y: 2.18, z: 19.05}
-  spawnRadius: 25
-  maxNavSampleDistance: 10
-  spawnInterval: 5
-  maxEnemies: 3
+  spawnRadius: 17
+  maxNavSampleDistance: 12
+  spawnInterval: 0
+  maxEnemies: 1
 --- !u!4 &1148484771
 Transform:
   m_ObjectHideFlags: 0
@@ -19383,7 +19383,7 @@ Transform:
   m_GameObject: {fileID: 1148484769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.45, y: 2.18, z: 19.05}
+  m_LocalPosition: {x: 20.45, y: 2.18, z: 19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32975,7 +32975,7 @@ MonoBehaviour:
   - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
     weight: 45
   center: {x: 147.45, y: 0.06, z: 22.76608}
-  spawnRadius: 50
+  spawnRadius: 15
   maxNavSampleDistance: 10
   spawnInterval: 8
   maxEnemies: 3
