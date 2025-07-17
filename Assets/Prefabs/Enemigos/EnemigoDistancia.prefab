@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRadius: 15
   lostTargetDelay: 3
-  vidaMax: 100
+  vidaMax: 50
   vidaActual: 0
   meleeRange: 0
   rangedRange: 10
@@ -239,6 +239,8 @@ MonoBehaviour:
   patrolPoints: []
   animator: {fileID: 597767829196511121}
   player: {fileID: 0}
+  floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
+  enemyRenderer: {fileID: 4487206266978934792}
   stuned: 0
   shooter: {fileID: 9157921181619562783}
   cooldown: 1.2

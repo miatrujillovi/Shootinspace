@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.AI;
 
-
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Enemigos con pesos")]
@@ -16,10 +15,16 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Configuración")]
     [SerializeField] private float spawnInterval;
-    [SerializeField] private int maxEnemies;
+    [SerializeField] public int maxEnemies;
 
     private int spawnedEnemies = 0;
     private float timer;
+
+    private void Start()
+    {
+        SpawnEnemy();
+        timer = 0f;
+    }
 
     private void Update()
     {
@@ -35,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        LevelManager.Instance.OnEnemySpawned();
         GameObject selectedPrefab = GetRandomEnemyByWeight();
 
         Vector3 randomPosition;

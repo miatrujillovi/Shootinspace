@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
-    [Header("Config gen�rica")]
+    [Header("Config generica")]
     public float sightRadius = 15f;
     public float lostTargetDelay = 3f;
     public float vidaMax;
@@ -20,6 +20,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public Transform[] patrolPoints;
     public Animator animator;
     public Transform player;
+    [SerializeField] private GameObject floatingTextPrefab;
+    [SerializeField] private Renderer enemyRenderer;
+
+    private Color originalColor;
 
     public bool stuned;
 
@@ -33,6 +37,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void Start()
     {
+        originalColor = enemyRenderer.material.color;
+
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
@@ -80,6 +86,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float amount)
     {
+        ShowDamageText(amount);
+
         vidaActual -= amount;
         if (vidaActual <= 0f)
         {
@@ -89,9 +97,19 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     }
     public virtual void TakeDamage(float amount, Vector3 _) => TakeDamage(amount);
 
+    private void ShowDamageText(float amount)
+    {
+        if (floatingTextPrefab == null) return;
+
+        GameObject go = Instantiate(floatingTextPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
+        FloatingDamageText text = go.GetComponent<FloatingDamageText>();
+        text.SetDamage(amount);
+    }
+
     protected virtual void Morir()
     {
         EnemyEvents.NotificarMuerte(gameObject);
+        LevelManager.Instance.OnEnemyDefeated();
         Destroy(gameObject);
     }
 
@@ -127,10 +145,14 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         agent.speed = 0;
         stuned = true;
+        enemyRenderer.material.color = Color.green;
         Debug.Log("Esta aturdido el enemigo");
+
         yield return new WaitForSeconds(5f);
+
         agent.speed = 2.5f;
         stuned = false;
+        enemyRenderer.material.color = originalColor;
         Debug.Log("Ya no esta aturdido el enemigo");
     }
 
