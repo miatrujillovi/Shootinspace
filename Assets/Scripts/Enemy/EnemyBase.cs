@@ -36,8 +36,29 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
+        GameObject initialPatrolPoint = new GameObject("PatrolPoint_" + gameObject.name);
+        initialPatrolPoint.transform.position = transform.position;
+        initialPatrolPoint.transform.SetParent(transform); 
+
+        if (patrolPoints == null || patrolPoints.Length == 0)
+        {
+            patrolPoints = new Transform[1];
+            patrolPoints[0] = initialPatrolPoint.transform;
+        }
+        else
+        {
+            Transform[] newPatrolPoints = new Transform[patrolPoints.Length + 1];
+            newPatrolPoints[0] = initialPatrolPoint.transform;
+            for (int i = 0; i < patrolPoints.Length; i++)
+            {
+                newPatrolPoints[i + 1] = patrolPoints[i];
+            }
+            patrolPoints = newPatrolPoints;
+        }
+
         SwitchState(patrol);
     }
+
 
     protected virtual void Update()
     {
@@ -73,8 +94,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         EnemyEvents.NotificarMuerte(gameObject);
         Destroy(gameObject);
     }
-
-    // Corrutinas
 
     private IEnumerator HandleJump(OffMeshLinkData data)
     {
@@ -114,8 +133,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         stuned = false;
         Debug.Log("Ya no esta aturdido el enemigo");
     }
-
-    // ------------------
 
     public virtual void OnCollisionEnter(Collision col)
     {
