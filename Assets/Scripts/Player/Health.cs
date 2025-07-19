@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using DG.Tweening;
 
 public class Health : MonoBehaviour, IDamageable
 {
@@ -10,6 +11,7 @@ public class Health : MonoBehaviour, IDamageable
     [Space]
     [Header("References for UI")]
     [SerializeField] private Image hpFiller;
+    [SerializeField] private RectTransform _heart;
 
     private float spawnInvincibilityTime = 1f;
     private float spawnTime;
@@ -24,9 +26,18 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (Time.time - spawnTime < spawnInvincibilityTime) return; //Invulnerable al inicio por 1s
 
+        //Shake the heart icon
+        _heart.DOShakeAnchorPos(
+            duration: 0.6f,        // total shake time
+            strength: 40f,         // how far it moves
+            vibrato: 60,           // how many times it vibrates
+            randomness: 90,        // variation in direction
+            snapping: false,
+            fadeOut: true          // shake less over time
+        ).SetEase(Ease.InOutExpo);
+
         currentHealth -= amount;
         hpFiller.fillAmount = currentHealth / maxHealth;
-        //Debug.Log($"[Health] TakeDamage called with {amount} at frame {Time.frameCount}\nStack Trace:\n{Environment.StackTrace}");
         if (currentHealth <= 0) {
             PlayerDeath(); 
         }

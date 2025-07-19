@@ -19,13 +19,10 @@ public class LevelManager : MonoBehaviour
     private int enemiesRemaining;
     private int recoveredFuel;
     private int currentLevel;
-    private TerrainTextureBlender terrainTextureBlender;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
-
-        terrainTextureBlender = GetComponent<TerrainTextureBlender>();
 
         recoveredFuel = 0;
         currentLevel = 1;
@@ -43,13 +40,6 @@ public class LevelManager : MonoBehaviour
 
         isFuelUnlocked = false;
         enemiesRemaining = 0;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(terrainTextureBlender.BlendTexturesRoutine(1, 0, terrains[0]));
-        StartCoroutine(terrainTextureBlender.BlendTexturesRoutine(2, 0, terrains[1]));
-        StartCoroutine(terrainTextureBlender.BlendTexturesRoutine(3, 0, terrains[2]));
     }
 
     //When player takes the fuel on the level (CAN ONLY HAPPEN WHEN ALL ENEMIES IN LEVEL HAVE BEEN DEFEATED)
@@ -103,30 +93,7 @@ public class LevelManager : MonoBehaviour
 
         if (enemiesRemaining <= 0)
         {
-            ChangeTerrainTexture(currentLevel);
             isFuelUnlocked = true;
-        }
-    }
-
-    private void ChangeTerrainTexture(int currentLevel)
-    {
-        switch (currentLevel)
-        {
-            case 1:
-                StartCoroutine(terrainTextureBlender.BlendTexturesRoutine(0, 1, terrains[0]));
-                break;
-
-            case 2:
-                StartCoroutine(terrainTextureBlender.BlendTexturesRoutine(0, 2, terrains[1]));
-                break;
-
-            case 3:
-                StartCoroutine(terrainTextureBlender.BlendTexturesRoutine(0, 3, terrains[2]));
-                break;
-
-            default:
-                Debug.LogError("Error while blending textures of terrain.");
-                break;
         }
     }
 

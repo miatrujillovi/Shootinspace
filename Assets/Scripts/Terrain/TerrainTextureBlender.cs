@@ -12,24 +12,24 @@ public class TerrainTextureBlender : MonoBehaviour
     public IEnumerator BlendTexturesRoutine(int textureFrom, int textureTo, Terrain terrain)
     {
         TerrainData terrainData = terrain.terrainData;
-        width = terrainData.alphamapWidth;
-        height = terrainData.alphamapHeight;
-        layers = terrainData.alphamapLayers;
+        int width = terrainData.alphamapWidth;
+        int height = terrainData.alphamapHeight;
+        int layers = terrainData.alphamapLayers;
 
-        alphaMaps = terrainData.GetAlphamaps(0, 0, width, height);
+        float[,,] alphaMaps = terrainData.GetAlphamaps(0, 0, width, height);
+        bool updated = false;
 
-        bool blending = true;
+        int rowStep = 10; // Change this to adjust performance. Smaller = smoother.
+        float blendSpeed = 0.3f;
 
-        while (blending)
+        for (int y = 0; y < height; y += rowStep)
         {
-            blending = false;
-
-            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
             {
-                for (int x = 0; x < width; x++)
+                for (int dy = 0; dy < rowStep && y + dy < height; dy++)
                 {
-                    float fromValue = alphaMaps[x, y, textureFrom];
-                    float toValue = alphaMaps[x, y, textureTo];
+                    float fromValue = alphaMaps[x, y + dy, textureFrom];
+                    float toValue = alphaMaps[x, y + dy, textureTo];
 
                     float delta = blendSpeed * Time.deltaTime;
                     if (fromValue > 0f)
@@ -37,16 +37,21 @@ public class TerrainTextureBlender : MonoBehaviour
                         float newFrom = Mathf.Max(fromValue - delta, 0f);
                         float newTo = toValue + (fromValue - newFrom);
 
-                        alphaMaps[x, y, textureFrom] = newFrom;
-                        alphaMaps[x, y, textureTo] = newTo;
+                        alphaMaps[x, y + dy, textureFrom] = newFrom;
+                        alphaMaps[x, y + dy, textureTo] = newTo;
 
-                        blending = true;
+                        updated = true;
                     }
                 }
             }
 
-            terrain.terrainData.SetAlphamaps(0, 0, alphaMaps);
-            yield return null;
+            // Apply changes and yield to spread load across frames
+            if (updated)
+            {
+                terrainData.SetAlphamaps(0, 0, alphaMaps);
+            }
+            yield return null; // wait one frame before next chunk
         }
     }
+
 }
