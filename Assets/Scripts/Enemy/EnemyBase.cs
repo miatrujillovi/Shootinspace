@@ -21,6 +21,10 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private GameObject floatingTextPrefab;
     [SerializeField] private Renderer enemyRenderer;
 
+    [Header("UI Destierro")]
+    [SerializeField] private GameObject destierroUI;
+    [SerializeField] private float uiActivationDistance = 5f;
+
     private Color originalColor;
 
     public bool stuned;
@@ -39,11 +43,29 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
+        if (destierroUI != null)
+            destierroUI.SetActive(false);
+
         SwitchState(chase);
     }
 
+
     protected virtual void Update()
     {
+        if (destierroUI != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            bool shouldShowUI = stuned && distanceToPlayer <= uiActivationDistance;
+            destierroUI.SetActive(shouldShowUI);
+
+            if (shouldShowUI)
+            {
+                destierroUI.transform.LookAt(player);
+                destierroUI.transform.Rotate(0, 180, 0); 
+            }
+        }
+
         if (agent.isOnOffMeshLink && !isJumping)
         {
             StartCoroutine(HandleJump(agent.currentOffMeshLinkData));

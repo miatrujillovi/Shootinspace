@@ -164,6 +164,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 7178746762083014244, guid: 7065deca2428c8b408da42eed332e278, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8688295321307735507, guid: 7065deca2428c8b408da42eed332e278, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.75
@@ -191,6 +195,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5d2db01b3b6d469b831dd396072d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1289444709093748691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7178746762083014244, guid: 7065deca2428c8b408da42eed332e278, type: 3}
+  m_PrefabInstance: {fileID: 8234004006481672631}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &5476602924527524287 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4487206266978934792, guid: 7065deca2428c8b408da42eed332e278, type: 3}
@@ -234,6 +243,8 @@ MonoBehaviour:
   player: {fileID: 0}
   floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
   enemyRenderer: {fileID: 5476602924527524287}
+  destierroUI: {fileID: 1289444709093748691}
+  uiActivationDistance: 5
   stuned: 0
   melee: {fileID: 6221165374482373767}
   shooter: {fileID: 959961403975667880}

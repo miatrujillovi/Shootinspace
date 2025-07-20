@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -6,11 +7,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpForce;
 
+    [Header("Dash Variables")]
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashDuration;
+    [SerializeField] private float dashCooldown;
+
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
     private float gravity = -9.81f;
     private float fallMultiplier = 2.5f;
+
+    private bool isDashing = false;
+    private bool canDash = true;
 
     private void Awake()
     {
@@ -23,9 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+        Vector3 moveDirection = (transform.right * horizontal + transform.forward * vertical).normalized;
 
-        Vector3 move = transform.right * horizontal + transform.forward * vertical;
-        characterController.Move(move.normalized * playerSpeed * Time.deltaTime);
+        if (!isDashing)
+        {
+            characterController.Move(moveDirection * playerSpeed * Time.deltaTime);
+        }
 
         if (isGrounded && velocity.y < 0)
         {
@@ -40,12 +52,35 @@ public class PlayerMovement : MonoBehaviour
         if (velocity.y < 0)
         {
             velocity.y += gravity * fallMultiplier * Time.deltaTime;
-        } 
+        }
         else
         {
             velocity.y += gravity * Time.deltaTime;
         }
 
         characterController.Move(velocity * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && moveDirection.magnitude > 0f)
+        {
+            StartCoroutine(PerformDash(moveDirection));
+        }
+    }
+
+    private IEnumerator PerformDash(Vector3 direction)
+    {
+        isDashing = true;
+        canDash = false;
+
+        float startTime = Time.time;
+
+        while (Time.time < startTime + dashDuration)
+        {
+            characterController.Move(direction * dashForce * Time.deltaTime);
+            yield return null;
+        }
+
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 }
