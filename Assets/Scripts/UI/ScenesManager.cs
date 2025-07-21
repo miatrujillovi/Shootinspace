@@ -21,7 +21,7 @@ public class ScenesManager : MonoBehaviour
 
     private IEnumerator StartCinematic()
     {
-        camTransform.DOMoveZ(-230.9f, 3f).SetEase(Ease.InOutSine);
+        yield return camTransform.DOMoveZ(-230.9f, 1.5f).SetEase(Ease.InOutSine).WaitForCompletion();
 
         camTransform.DOMove(new Vector3(-140f, 11.1f, -48.8f), 3f).SetEase(Ease.InSine);
         camTransform.DORotate(new Vector3(0f, 66.265f, 0f), 3f).SetEase(Ease.InSine);
