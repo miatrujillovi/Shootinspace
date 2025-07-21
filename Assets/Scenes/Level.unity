@@ -17844,9 +17844,9 @@ MonoBehaviour:
   - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
     weight: 40
   center: {x: 271.315, y: 0.546, z: 19.054}
-  spawnRadius: 25
-  maxNavSampleDistance: 10
-  spawnInterval: 10
+  spawnRadius: 18
+  maxNavSampleDistance: 1
+  spawnInterval: 5
   maxEnemies: 3
 --- !u!4 &1076209614
 Transform:
@@ -17949,6 +17949,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076826958}
   m_Mesh: {fileID: 8475172869306763807, guid: aea49fcb371e99b408de2d8a71d10b06, type: 3}
+--- !u!1 &1082975673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082975674}
+  - component: {fileID: 1082975675}
+  m_Layer: 0
+  m_Name: CombatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1082975674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082975673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1123698406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1082975675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082975673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5724c7710ca70d149b891c0171935b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1088954507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18669,6 +18713,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1438216328}
+  - {fileID: 1473656083}
+  - {fileID: 1082975674}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1129002306
@@ -19070,6 +19116,135 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08807996, y: 0.12641905, z: 0.05030513}
   m_Center: {x: 0, y: 0.061667368, z: 0.00079521496}
+--- !u!1 &1145196002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1145196004}
+  - component: {fileID: 1145196003}
+  m_Layer: 0
+  m_Name: Music Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1145196003
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145196002}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1145196004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145196002}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18.219885, y: 24.287607, z: 4.2207394}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1473656083}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1147395314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19180,8 +19355,8 @@ MonoBehaviour:
   - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
     weight: 55
   center: {x: 20.45, y: 2.18, z: 19.05}
-  spawnRadius: 17
-  maxNavSampleDistance: 12
+  spawnRadius: 18
+  maxNavSampleDistance: 2
   spawnInterval: 1
   maxEnemies: 3
 --- !u!4 &1148484771
@@ -25070,6 +25245,63 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6230574, y: 2.877758, z: 1.6230574}
   m_Center: {x: 0, y: 1.438879, z: -0.021108933}
+--- !u!1 &1473656082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473656083}
+  - component: {fileID: 1473656084}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1473656083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473656082}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1145196004}
+  m_Father: {fileID: 1123698406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1473656084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473656082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a0c37e82b4ff274b838ca5f442ca27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 1145196003}
+  sfxSource: {fileID: 0}
+  fightMusic: {fileID: 8300000, guid: 6c2a638236833394d9ee22c9dbf5cfaf, type: 3}
+  interludeMusic: {fileID: 8300000, guid: ed4f2ce2a82d60e4d9f481dec86c3e8a, type: 3}
+  gunShot: {fileID: 0}
+  parry: {fileID: 0}
+  destierro: {fileID: 0}
+  enemyInjured: {fileID: 0}
+  playerInjured: {fileID: 0}
+  enemyDeath: {fileID: 0}
+  fuelObtained: {fileID: 0}
+  buttonClick: {fileID: 0}
 --- !u!1001 &1475246531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32944,7 +33176,7 @@ Transform:
   m_GameObject: {fileID: 1904003990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 147.45, y: 0.06, z: 22.766085}
+  m_LocalPosition: {x: 147.45, y: 0.06, z: 20.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32969,10 +33201,10 @@ MonoBehaviour:
     weight: 10
   - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
     weight: 45
-  center: {x: 147.45, y: 0.06, z: 22.76608}
-  spawnRadius: 15
-  maxNavSampleDistance: 10
-  spawnInterval: 8
+  center: {x: 147.45, y: 7.5, z: 18.9}
+  spawnRadius: 18
+  maxNavSampleDistance: 2
+  spawnInterval: 3
   maxEnemies: 3
 --- !u!4 &1905501038 stripped
 Transform:

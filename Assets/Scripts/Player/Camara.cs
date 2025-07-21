@@ -7,8 +7,7 @@ public class Camara : MonoBehaviour
     [Header("Referencias")]
     [SerializeField] private Camera playerCamera;
 
-    [Header("Rotacion")]
-    [SerializeField] private float rotationSensibility;
+    private float rotationSensibility;
 
     private float cameraVerticalAngle;
     private Vector3 rotationinput = Vector3.zero;
@@ -16,6 +15,7 @@ public class Camara : MonoBehaviour
     private void Awake()
     {
         playerCamera = Camera.main;
+        rotationSensibility = PlayerPrefs.GetFloat("MouseSensitivity", 100f);
     }
 
     private void Update()

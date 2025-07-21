@@ -29,7 +29,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public bool stuned;
 
-    protected EnemyState _current;
+    public EnemyState _current;
     private bool isJumping;
     public readonly ChaseState chase = new ChaseState();
     public readonly AttackState attack = new AttackState();
@@ -47,6 +47,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             destierroUI.SetActive(false);
 
         SwitchState(chase);
+
+        Invoke(nameof(RegisterSelf), 0.1f);
+    }
+
+    private void RegisterSelf()
+    {
+        CombatManager.Instance?.RegisterEnemy(this);
     }
 
 
@@ -87,6 +94,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public void SwitchState(EnemyState next)
     {
+        Debug.Log($"Enemy {name} cambiando a estado {next.GetType().Name}");
         _current?.Exit(this);
         _current = next;
         _current?.Enter(this);
@@ -120,6 +128,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         EnemyEvents.NotificarMuerte(gameObject);
         LevelManager.Instance.OnEnemyDefeated();
         Destroy(gameObject);
+        CombatManager.Instance?.UnregisterEnemy(this);
     }
 
     private IEnumerator HandleJump(OffMeshLinkData data)
@@ -183,4 +192,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public abstract bool IsInAttackRange();
 
     public abstract float DoAttack();
+
+    public virtual bool IsInCombatState()
+    {
+        return _current != null && (_current is ChaseState || _current is AttackState);
+    }
 }

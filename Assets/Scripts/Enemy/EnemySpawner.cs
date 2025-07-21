@@ -96,6 +96,18 @@ public class EnemySpawner : MonoBehaviour
 
         return enemyTypes[0].prefab;
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Esfera sólida semitransparente
+        Gizmos.color = new Color(1f, 0.6f, 0.6f, 0.6f);
+        Gizmos.DrawSphere(center, spawnRadius);
+
+        // Contorno más fuerte
+        Gizmos.color = new Color(1f, 0.6f, 0.6f, 1f);
+        Gizmos.DrawWireSphere(center, spawnRadius);
+    }
+
 }
 
 
