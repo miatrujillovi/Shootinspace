@@ -18715,6 +18715,7 @@ Transform:
   - {fileID: 1438216328}
   - {fileID: 1473656083}
   - {fileID: 1082975674}
+  - {fileID: 1543991723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1129002306
@@ -25302,6 +25303,9 @@ MonoBehaviour:
   enemyDeath: {fileID: 0}
   fuelObtained: {fileID: 0}
   buttonClick: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: b29902d553619704eb359d226e9237d7, type: 2}
+  musicGroup: {fileID: 7789633374206356278, guid: b29902d553619704eb359d226e9237d7, type: 2}
+  sfxGroup: {fileID: -8505238783366056977, guid: b29902d553619704eb359d226e9237d7, type: 2}
 --- !u!1001 &1475246531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26477,6 +26481,55 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.034270085, y: 0.11521788, z: 0.03635902}
   m_Center: {x: 0.00046667366, y: 0.05763248, z: 0.003364231}
+--- !u!1 &1543991722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1543991723}
+  - component: {fileID: 1543991724}
+  m_Layer: 0
+  m_Name: OptionsMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1543991723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543991722}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1123698406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1543991724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543991722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0daa4896c71186d449deb69ee8ed7392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: b29902d553619704eb359d226e9237d7, type: 2}
+  masterSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  sensitivitySlider: {fileID: 0}
 --- !u!1 &1548148083
 GameObject:
   m_ObjectHideFlags: 0
