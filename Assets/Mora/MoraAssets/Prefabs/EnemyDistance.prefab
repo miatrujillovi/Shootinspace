@@ -57,15 +57,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 738508165877278981, guid: cf932e767562c98498d04e12142e33db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.70552
+      value: 20.11
       objectReference: {fileID: 0}
     - target: {fileID: 738508165877278981, guid: cf932e767562c98498d04e12142e33db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9959717
+      value: 2.149
       objectReference: {fileID: 0}
     - target: {fileID: 738508165877278981, guid: cf932e767562c98498d04e12142e33db, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.23125
+      value: 22.04
       objectReference: {fileID: 0}
     - target: {fileID: 738508165877278981, guid: cf932e767562c98498d04e12142e33db, type: 3}
       propertyPath: m_LocalRotation.w
@@ -223,10 +223,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 0.6
+  m_Radius: 0.225
+  m_Height: 0.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!114 &2048614196492162528 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 599879548943255528, guid: cf932e767562c98498d04e12142e33db, type: 3}

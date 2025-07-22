@@ -12,7 +12,7 @@ public class HybridEnemy : EnemyBase
 
     public float meleeCooldown = 1f;
     public float rangedCooldown = 1.2f;
-
+    public readonly BossAttackState bossAttack = new BossAttackState();
     private AttackMode currentMode;
 
     private float meleeChance = 0.5f;
@@ -27,7 +27,10 @@ public class HybridEnemy : EnemyBase
     {
         base.Start();
         ChooseAttackMode();
+        attack = bossAttack;
+        SwitchState(chase);
     }
+
 
     protected override void Update()
     {

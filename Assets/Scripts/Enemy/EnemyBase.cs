@@ -35,7 +35,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public EnemyState _current;
     private bool isJumping;
     public readonly ChaseState chase = new ChaseState();
-    public readonly AttackState attack = new AttackState();
+    public virtual AttackState attack { get; protected set; } = new AttackState();
+
 
     protected virtual void Awake() => vidaActual = vidaMax;
 
@@ -137,11 +138,11 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void Morir()
     {
         isDead = true;
-        stuned = true; // Se queda perma-stunned visualmente
+        stuned = true;
 
         EnemyEvents.NotificarMuerte(gameObject);
         LevelManager.Instance.OnEnemyDefeated();
-        deathHandler.Die();
+        Destroy(gameObject);
         CombatManager.Instance?.UnregisterEnemy(this);
     }
 

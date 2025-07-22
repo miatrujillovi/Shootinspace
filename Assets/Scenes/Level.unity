@@ -17624,17 +17624,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypes:
-  - prefab: {fileID: 3383899493014809546, guid: 7065deca2428c8b408da42eed332e278, type: 3}
+  - prefab: {fileID: 1533886252818063799, guid: f82a0336b897f884c86493040221ae82, type: 3}
     weight: 40
-  - prefab: {fileID: 6679693313802375805, guid: 9ba5be4b17092f54782947aeb53a3ccb, type: 3}
+  - prefab: {fileID: 2366213281879261974, guid: 14fb5e7eb0b783e4694f09e6ad7893e5, type: 3}
     weight: 20
-  - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
+  - prefab: {fileID: 6172319069491615054, guid: a1769aa965276af48a733a7b641a4422, type: 3}
     weight: 40
   center: {x: 271.315, y: 0.546, z: 19.054}
   spawnRadius: 18
   maxNavSampleDistance: 1
-  spawnInterval: 5
-  maxEnemies: 3
+  spawnInterval: 3
+  maxEnemies: 36
 --- !u!4 &1076209614
 Transform:
   m_ObjectHideFlags: 0
@@ -19137,16 +19137,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - prefab: {fileID: 1533886252818063799, guid: f82a0336b897f884c86493040221ae82, type: 3}
-    weight: 100
-  - prefab: {fileID: 6679693313802375805, guid: 9ba5be4b17092f54782947aeb53a3ccb, type: 3}
-    weight: 0
-  - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
-    weight: 0
+    weight: 40
+  - prefab: {fileID: 2366213281879261974, guid: 14fb5e7eb0b783e4694f09e6ad7893e5, type: 3}
+    weight: 5
+  - prefab: {fileID: 6172319069491615054, guid: a1769aa965276af48a733a7b641a4422, type: 3}
+    weight: 55
   center: {x: 20.45, y: 2.18, z: 19.05}
   spawnRadius: 18
   maxNavSampleDistance: 2
   spawnInterval: 1
-  maxEnemies: 1
+  maxEnemies: 12
 --- !u!4 &1148484771
 Transform:
   m_ObjectHideFlags: 0
@@ -33443,17 +33443,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTypes:
-  - prefab: {fileID: 3383899493014809546, guid: 7065deca2428c8b408da42eed332e278, type: 3}
+  - prefab: {fileID: 1533886252818063799, guid: f82a0336b897f884c86493040221ae82, type: 3}
     weight: 45
-  - prefab: {fileID: 6679693313802375805, guid: 9ba5be4b17092f54782947aeb53a3ccb, type: 3}
+  - prefab: {fileID: 2366213281879261974, guid: 14fb5e7eb0b783e4694f09e6ad7893e5, type: 3}
     weight: 10
-  - prefab: {fileID: 2449308153367764209, guid: 610f8c3e658c885478ca56f2cc12aec3, type: 3}
+  - prefab: {fileID: 6172319069491615054, guid: a1769aa965276af48a733a7b641a4422, type: 3}
     weight: 45
   center: {x: 147.45, y: 7.5, z: 18.9}
   spawnRadius: 18
   maxNavSampleDistance: 2
-  spawnInterval: 3
-  maxEnemies: 3
+  spawnInterval: 2
+  maxEnemies: 24
 --- !u!4 &1905501038 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cdc399b99a068724aa2153532f6a2a74, type: 3}

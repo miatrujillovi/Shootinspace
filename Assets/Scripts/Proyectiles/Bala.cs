@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class Bala : MonoBehaviour
 {
@@ -12,13 +13,17 @@ public class Bala : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.TryGetComponent<IDamageable>(out var target))
+        if (!collision.gameObject.CompareTag("Player") &&
+            collision.collider.TryGetComponent<IDamageable>(out var target))
+        {
             target.TakeDamage(damage);
+        }
 
         if (ExplosiveBullets) SpawnExplosionTrigger();
 
         Destroy(gameObject);
     }
+
 
     private void SpawnExplosionTrigger()
     {
