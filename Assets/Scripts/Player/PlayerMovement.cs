@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashForce;
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCooldown;
+    [SerializeField] private GameObject dashIcon;
+    [SerializeField] private GameObject dashFiller;
 
     private CharacterController characterController;
     private Vector3 velocity;
@@ -20,10 +23,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isDashing = false;
     private bool canDash = true;
+    private Image dashIconImage;
+    private Image dashFillerImage;
+
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        dashIconImage = dashIcon.GetComponent<Image>();
+        dashFillerImage = dashFiller.GetComponent<Image>();
+
     }
 
     private void Update()
@@ -83,4 +92,9 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
+
+    /*private IEnumerator ShowDashCooldown()
+    {
+        dashFillerImage.
+    }*/
 }

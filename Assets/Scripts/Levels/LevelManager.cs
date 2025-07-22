@@ -13,7 +13,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject winScreen;
 
     [SerializeField] private List<EnemySpawner> levelSpawners;
-    [SerializeField] private List<Terrain> terrains;
 
     [HideInInspector] public bool isFuelUnlocked = false;
     private int enemiesRemaining;

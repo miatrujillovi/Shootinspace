@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using TMPro;
+using UnityEngine.UI;
 
 public class Shoot : MonoBehaviour
 {
@@ -27,7 +28,9 @@ public class Shoot : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI currentAmmoTXT;
     [SerializeField] private TextMeshProUGUI ammoAmountTXT;
+    [SerializeField] private GameObject reload;
 
+    private Image reloadFiller;
     private float nextFireTime = 0f;
     private bool isReloading = false;
 
@@ -38,6 +41,8 @@ public class Shoot : MonoBehaviour
 
         if (currentMagazines <= 0)
             currentMagazines = maxMagazines;
+
+        reloadFiller = reload.GetComponent<Image>();
     }
 
     void Update()
@@ -56,6 +61,7 @@ public class Shoot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo && currentMagazines > 0)
         {
             StartCoroutine(Recargar());
+            StartCoroutine(ShowReloadUI());
         }
     }
 
@@ -90,7 +96,26 @@ public class Shoot : MonoBehaviour
                 currentMagazines = 0;
             }
         }
+
         isReloading = false;
+    }
+
+    private IEnumerator ShowReloadUI()
+    {
+        reloadFiller.fillAmount = 0f;
+        reload.SetActive(true);
+
+        float timer = 0f;
+
+        while (timer < reloadTime)
+        {
+            timer += Time.deltaTime;
+            reloadFiller.fillAmount = timer / reloadTime;
+            yield return null;
+        }
+
+        reloadFiller.fillAmount = 1f;
+        reload.SetActive(false);
     }
 
     private void UpdateUI()
