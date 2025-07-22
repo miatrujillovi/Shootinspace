@@ -6,12 +6,18 @@ public class ChaseState : EnemyState
 
     public override void Enter(EnemyBase e)
     {
+        if (e.stuned) return;
+
+        e.animator.SetBool("Chasing", true);
+        // e.animator.SetBool("Stunned", false);
+
         if (e is HybridEnemy hybrid)
             hybrid.PrepareForNextAttackCycle();
 
         e.agent.isStopped = false;
         _lostTimer = 0f;
     }
+
 
     public override void Tick(EnemyBase e)
     {

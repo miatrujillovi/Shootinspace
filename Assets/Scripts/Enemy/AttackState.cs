@@ -12,9 +12,15 @@ public class AttackState : EnemyState
             return;
         }
 
+        e.animator.SetTrigger("Attacking");
+        e.animator.SetBool("Chasing", false);
+        // e.animator.SetBool("Stunned", false);
+
         e.agent.isStopped = true;
         _cooldown = 0f;
     }
+
+
 
     public override void Tick(EnemyBase e)
     {
@@ -58,7 +64,10 @@ public class AttackState : EnemyState
     {
         e.agent.isStopped = false;
 
+        e.animator.ResetTrigger("Attacking");
+
         if (e is HybridEnemy h)
             h.PrepareForNextAttackCycle();
     }
+
 }

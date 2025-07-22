@@ -20,6 +20,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public Transform player;
     [SerializeField] private GameObject floatingTextPrefab;
     [SerializeField] private Renderer enemyRenderer;
+    [SerializeField] private CharacterDeathHandler deathHandler;
 
     [Header("UI Destierro")]
     [SerializeField] private GameObject destierroUI;
@@ -28,6 +29,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     private Color originalColor;
 
     public bool stuned;
+    private bool isDead = false;
+
 
     public EnemyState _current;
     private bool isJumping;
@@ -94,11 +97,19 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public void SwitchState(EnemyState next)
     {
+        if (stuned || isDead)
+        {
+            Debug.Log($"Enemy {name} está aturdido o muerto. No puede cambiar a {next.GetType().Name}");
+            return;
+        }
+
         Debug.Log($"Enemy {name} cambiando a estado {next.GetType().Name}");
         _current?.Exit(this);
         _current = next;
         _current?.Enter(this);
     }
+
+
 
     public virtual void TakeDamage(float amount)
     {
@@ -125,11 +136,15 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     protected virtual void Morir()
     {
+        isDead = true;
+        stuned = true; // Se queda perma-stunned visualmente
+
         EnemyEvents.NotificarMuerte(gameObject);
         LevelManager.Instance.OnEnemyDefeated();
-        Destroy(gameObject);
+        deathHandler.Die();
         CombatManager.Instance?.UnregisterEnemy(this);
     }
+
 
     private IEnumerator HandleJump(OffMeshLinkData data)
     {
@@ -160,18 +175,29 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public virtual IEnumerator stunCoroutine()
     {
+        float originalSpeed = agent.speed;
         agent.speed = 0;
         stuned = true;
+
         enemyRenderer.material.color = Color.green;
-        Debug.Log("Esta aturdido el enemigo");
+
+        animator.ResetTrigger("Attacking");
+        animator.SetBool("Stunned", true);
+        animator.SetBool("Chasing", false);
 
         yield return new WaitForSeconds(5f);
 
-        agent.speed = 2.5f;
-        stuned = false;
-        enemyRenderer.material.color = originalColor;
-        Debug.Log("Ya no esta aturdido el enemigo");
+        if (!isDead) 
+        {
+            agent.speed = originalSpeed;
+            stuned = false;
+
+            enemyRenderer.material.color = originalColor;
+            animator.SetBool("Stunned", false);
+        }
     }
+
+
 
     public virtual void OnCollisionEnter(Collision col)
     {
