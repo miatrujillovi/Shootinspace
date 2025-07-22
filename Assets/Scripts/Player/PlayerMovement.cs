@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        dashIconImage = dashIcon.GetComponent<Image>();
-        dashFillerImage = dashFiller.GetComponent<Image>();
+        //dashIconImage = dashIcon.GetComponent<Image>();
+        //dashFillerImage = dashFiller.GetComponent<Image>();
 
     }
 
