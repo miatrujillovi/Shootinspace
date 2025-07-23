@@ -113,6 +113,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06d875f2fac35104ba52d6b161e6bf5e, type: 3}
+--- !u!1 &4642022122446345830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7466229182268593369, guid: 06d875f2fac35104ba52d6b161e6bf5e, type: 3}
+  m_PrefabInstance: {fileID: 2879657669531861695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9201354867811945297 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6361157336040671726, guid: 06d875f2fac35104ba52d6b161e6bf5e, type: 3}
@@ -194,10 +199,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2150661618067929769, guid: cf932e767562c98498d04e12142e33db, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ddc1060f00a28f428df59f5e234f522, type: 2}
     - target: {fileID: 5498464136792741755, guid: cf932e767562c98498d04e12142e33db, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7c3c725f8af3b3a4b87aaa46402674d0, type: 2}
+    - target: {fileID: 6221763219130256993, guid: cf932e767562c98498d04e12142e33db, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: eb495a25bfa14784cacc1891562bea5d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -363,7 +376,7 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
   enemyRenderer: {fileID: 181333915210098832}
   deathHandler: {fileID: 6669599977683378457}
-  destierroUI: {fileID: 0}
+  destierroUI: {fileID: 4642022122446345830}
   uiActivationDistance: 5
   stuned: 0
   melee: {fileID: 3547394876068010349}

@@ -396,7 +396,7 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
   enemyRenderer: {fileID: 1194128513732269817}
   deathHandler: {fileID: 4150112742100364484}
-  destierroUI: {fileID: 0}
+  destierroUI: {fileID: 6930174667905430070}
   uiActivationDistance: 5
   stuned: 0
   melee: {fileID: 8012165566251717357}
@@ -1269,7 +1269,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b310ec9c35a8f54fb68f91929a8dd31, type: 2}
+  - {fileID: 2100000, guid: b4852c775d45ffa448bfcb974e67e2a5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2162,7 +2162,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b5d84955d1b6c24284569a56e8c3e0a, type: 2}
+  - {fileID: 2100000, guid: 767ef7038e3a3764a93d5c603a46ad65, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2582,5 +2582,10 @@ PrefabInstance:
 --- !u!224 &6914973909926063873 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6361157336040671726, guid: 06d875f2fac35104ba52d6b161e6bf5e, type: 3}
+  m_PrefabInstance: {fileID: 554420795354359535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6930174667905430070 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7466229182268593369, guid: 06d875f2fac35104ba52d6b161e6bf5e, type: 3}
   m_PrefabInstance: {fileID: 554420795354359535}
   m_PrefabAsset: {fileID: 0}
