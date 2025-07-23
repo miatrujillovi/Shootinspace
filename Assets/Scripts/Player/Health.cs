@@ -44,7 +44,7 @@ public class Health : MonoBehaviour, IDamageable
         playerRegeneration = StartCoroutine(RegenerateHealth());
 
         if (currentHealth <= 0) {
-            PlayerDeath(); 
+            LevelManager.Instance.PlayerDeath();
         }
     }
 
@@ -66,11 +66,5 @@ public class Health : MonoBehaviour, IDamageable
         }
 
         playerRegeneration = null;
-    }
-
-    private void PlayerDeath()
-    {
-        Debug.Log("Player has died");
-        //Dead Logic Here
     }
 }

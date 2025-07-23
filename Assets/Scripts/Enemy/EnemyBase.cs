@@ -200,17 +200,17 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
 
 
-    public virtual void OnCollisionEnter(Collision col)
+    public virtual void OnTriggerEnter(Collider other)
     {
-        if (stuned && col.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
+        if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
             Morir();
         }
     }
 
-    public virtual void OnCollisionStay(Collision col)
+    public virtual void OnTriggerStay(Collider other)
     {
-        if (stuned && col.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
+        if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
             Morir();
         }

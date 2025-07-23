@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 8374152336658888164}
   - component: {fileID: 2638637347138861787}
   - component: {fileID: 2595883850559397802}
+  - component: {fileID: -7360866947966078117}
   m_Layer: 0
   m_Name: EnemigoMelee
   m_TagString: Enemy
@@ -292,6 +293,7 @@ MonoBehaviour:
   player: {fileID: 0}
   floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
   enemyRenderer: {fileID: 7915289157919183234}
+  deathHandler: {fileID: 0}
   destierroUI: {fileID: 9082139516844537003}
   uiActivationDistance: 5
   stuned: 0
@@ -319,6 +321,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &-7360866947966078117
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449308153367764209}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1844050493597818994
 PrefabInstance:
   m_ObjectHideFlags: 0

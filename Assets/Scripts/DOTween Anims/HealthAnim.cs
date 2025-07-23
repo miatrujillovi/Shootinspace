@@ -14,6 +14,6 @@ public class HealthAnim : MonoBehaviour
     {
         _heart.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 1f)
             .SetEase(Ease.InOutQuad)
-            .SetLoops(-1, LoopType.Yoyo);
+            .SetLoops(-1, LoopType.Yoyo).SetId("HeartAnim");
     }
 }

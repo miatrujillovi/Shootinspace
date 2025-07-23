@@ -1,5 +1,7 @@
 using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -8,9 +10,12 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Vector3[] levelStartLocation;
     [SerializeField] private Transform player;
+    [SerializeField] private CharacterController playerCR;
     [SerializeField] private RectTransform screenTransition;
     [SerializeField] private GameObject gameplayScreen;
     [SerializeField] private GameObject winScreen;
+    [SerializeField] private GameObject deathScreen;
+    [SerializeField] private Camara playerCamaraScript;
 
     [SerializeField] private List<EnemySpawner> levelSpawners;
 
@@ -23,22 +28,31 @@ public class LevelManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
 
+        RestartGame();
+    }
+
+    public void RestartGame()
+    {
+        //Restarting Level Logic
         recoveredFuel = 0;
         currentLevel = 1;
 
+        //Restarting UI/Screen Logic
         winScreen.SetActive(false);
-        gameObject.SetActive(true);
+        deathScreen.SetActive(false);
+        gameplayScreen.SetActive(true);
 
-        player.position = levelStartLocation[0];
+        //Restarting Player Logic
+        playerCamaraScript.enabled = true;
+        NextLevel(currentLevel);
+    }
 
-        for (int i = 0; i < levelSpawners.Count; i++)
-        {
-            levelSpawners[i].gameObject.SetActive(false);
-        }
-        levelSpawners[0].gameObject.SetActive(true);
-
-        isFuelUnlocked = false;
-        enemiesRemaining = 0;
+    public void PlayerDeath()
+    {
+        gameplayScreen.SetActive(false);
+        deathScreen.SetActive(true);
+        playerCamaraScript.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     //When player takes the fuel on the level (CAN ONLY HAPPEN WHEN ALL ENEMIES IN LEVEL HAVE BEEN DEFEATED)
@@ -46,15 +60,17 @@ public class LevelManager : MonoBehaviour
     {
         recoveredFuel++;
         currentLevel++;
+        Debug.Log("Se recupero fuel y avanzo a nivel: " + currentLevel);
         NextLevel(currentLevel);
     }
 
     //Function to change things onto NextLevel
     public void NextLevel(int _nextLevel)
     {
-        if (_nextLevel > levelStartLocation.Length || _nextLevel > levelSpawners.Count)
+        if (_nextLevel > levelStartLocation.Length)
         {
-            Debug.LogError("No hay mas niveles disponibles.");
+            Debug.Log("Se completaron todos los niveles.");
+            return;
         }
 
         enemiesRemaining = 0;
@@ -67,18 +83,19 @@ public class LevelManager : MonoBehaviour
 
         levelSpawners[_nextLevel - 1].gameObject.SetActive(true);
 
+        Debug.Log("Calling NextLevel with: " + _nextLevel);
         LevelTransition(levelStartLocation[_nextLevel - 1]);
     }
 
     //Screen Transition to Move player to the next Level
     public void LevelTransition(Vector3 newPosition)
     {
-        screenTransition.DOScale(Vector3.one * 3f, 1.3f).SetEase(Ease.InQuad).OnComplete(() =>
-        {
-
-            player.DOMove(newPosition, 0.5f);
-            screenTransition.DOScale(Vector3.zero, 1.3f).SetEase(Ease.OutQuad);
-        });
+        playerCR.enabled = false;
+        Debug.Log("It passed");
+        Debug.Log("Posición antes: " + player.position);
+        player.position = newPosition;
+        Debug.Log("Posición después: " + player.position);
+        playerCR.enabled = true;
     }
 
     public void OnEnemySpawned()
@@ -100,8 +117,15 @@ public class LevelManager : MonoBehaviour
     {
         if (recoveredFuel >= 3)
         {
-            gameObject.SetActive(false);
-            winScreen.SetActive(true);
+            PlayerHasWon();
         }
+    }
+
+    private void PlayerHasWon()
+    {
+        gameObject.SetActive(false);
+        winScreen.SetActive(true);
+        playerCamaraScript.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

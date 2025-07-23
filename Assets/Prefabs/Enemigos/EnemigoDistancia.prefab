@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 2355164292322908722}
   - component: {fileID: 597767829196511121}
   - component: {fileID: 3807749397525843333}
+  - component: {fileID: 691200317550503705}
   m_Layer: 0
   m_Name: EnemigoDistancia
   m_TagString: Enemy
@@ -241,11 +242,35 @@ MonoBehaviour:
   player: {fileID: 0}
   floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
   enemyRenderer: {fileID: 4487206266978934792}
+  deathHandler: {fileID: 0}
   destierroUI: {fileID: 7178746762083014244}
   uiActivationDistance: 5
   stuned: 0
   shooter: {fileID: 9157921181619562783}
   cooldown: 1.2
+--- !u!136 &691200317550503705
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383899493014809546}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5491931787319579220
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,10 +18,10 @@ public class Camara : MonoBehaviour
         rotationSensibility = PlayerPrefs.GetFloat("MouseSensitivity", 100f);
 
         //Puse esto porque no iniciaba desde el mainmenu y el PlayerPref era cero AHJSAS
-        if (rotationSensibility <= 0f)
+        /*if (rotationSensibility <= 0f)
         {
             rotationSensibility = 100f;
-        }
+        }*/
     }
 
     private void Update()
