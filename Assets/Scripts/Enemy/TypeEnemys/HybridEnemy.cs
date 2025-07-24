@@ -99,8 +99,6 @@ public class HybridEnemy : EnemyBase
         {
             meleeChance = Mathf.Clamp01(meleeChance + adjustAmount);
         }
-
-        Debug.Log($"Probabilidades ajustadas -> Melee: {meleeChance}, Ranged: {rangedChance}");
     }
 
     public override bool IsInAttackRange()
@@ -117,6 +115,7 @@ public class HybridEnemy : EnemyBase
 
         if (currentMode == AttackMode.Melee && dist <= meleeRange)
         {
+            animator.SetTrigger("MeleeAttack");
             melee.ActivateHitbox();
             MarkAttackSuccessful();
             return meleeCooldown;
@@ -124,10 +123,12 @@ public class HybridEnemy : EnemyBase
 
         if (currentMode == AttackMode.Ranged && dist <= rangedRange)
         {
+            animator.SetTrigger("RangedAttack");
             shooter.Shoot(player.position);
             MarkAttackSuccessful();
             return rangedCooldown;
         }
+
 
         return 0f;
     }

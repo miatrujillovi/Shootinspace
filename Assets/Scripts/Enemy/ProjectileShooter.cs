@@ -8,14 +8,13 @@ public class ProjectileShooter : MonoBehaviour
     [SerializeField] private Transform firePoint;
 
     [Header("Stats")]
-    [SerializeField] private float projectileSpeed = 20f;
-    [SerializeField] private float damage = 10f;
-    [SerializeField] private float fireCooldown = 0.75f;
-    [SerializeField] private float spreadAngle = 1.5f;
+    [SerializeField] private float projectileSpeed;
+    [SerializeField] private float damage;
+    [SerializeField] private float fireCooldown;
+    [SerializeField] private float spreadAngle;
 
-    [Header("FX (opcionales)")]
-    [SerializeField] private ParticleSystem muzzleFlash;
-    [SerializeField] private AudioClip shotSFX;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioSource audioSrc;
 
     float _nextFireTime = 0f;
@@ -35,10 +34,10 @@ public class ProjectileShooter : MonoBehaviour
             ? PoolManager.Instance.Get(projectilePrefab, firePoint.position, Quaternion.LookRotation(dir))
             : Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(dir));
 
+
         proj.Init(dir * projectileSpeed, damage, gameObject);
 
-        muzzleFlash?.Play();
-        if (shotSFX) audioSrc?.PlayOneShot(shotSFX);
+        if (shootSound) audioSrc?.PlayOneShot(shootSound);
 
         return true;
     }

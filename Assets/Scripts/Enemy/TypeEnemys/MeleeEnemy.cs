@@ -4,7 +4,7 @@ public class MeleeEnemy : EnemyBase
 {
     [Header("Melee")]
     public MeleeHitbox melee;
-    public float cooldown = 1f;
+    public float cooldown;
 
     public override bool IsInAttackRange()
         => Vector3.Distance(transform.position, player.position) <= meleeRange;

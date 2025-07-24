@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 7390756364395926089}
   - component: {fileID: 7621371121831786808}
   - component: {fileID: 4441791175567810797}
+  - component: {fileID: 2967011897947486833}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -389,7 +390,7 @@ MonoBehaviour:
   vidaMax: 100
   vidaActual: 0
   meleeRange: 4
-  rangedRange: 12
+  rangedRange: 15
   agent: {fileID: 7621371121831786808}
   animator: {fileID: 1844879378631347832}
   player: {fileID: 0}
@@ -398,11 +399,112 @@ MonoBehaviour:
   deathHandler: {fileID: 4150112742100364484}
   destierroUI: {fileID: 6930174667905430070}
   uiActivationDistance: 5
+  deathSound: {fileID: 8300000, guid: 033a046020634824d82dc7bfb773169a, type: 3}
+  stunnedSound: {fileID: 8300000, guid: cb950b91717181b48bfa23b8d28f5c08, type: 3}
+  destierroSound: {fileID: 8300000, guid: 693b274a8c1378245993d70740e52432, type: 3}
+  audioSrc: {fileID: 2967011897947486833}
   stuned: 0
   melee: {fileID: 8012165566251717357}
   shooter: {fileID: 3405629222248327314}
   meleeCooldown: 1.25
   rangedCooldown: 1.6
+--- !u!82 &2967011897947486833
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2366213281879261974}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2700440830320935013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,11 +2315,10 @@ MonoBehaviour:
   firePoint: {fileID: 4024446589074923942}
   projectileSpeed: 20
   damage: 5
-  fireCooldown: 0.75
+  fireCooldown: 1.6
   spreadAngle: 1.5
-  muzzleFlash: {fileID: 0}
-  shotSFX: {fileID: 0}
-  audioSrc: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: c04d4442c22f1af47b43641f21740964, type: 3}
+  audioSrc: {fileID: 2967011897947486833}
 --- !u!135 &4772657513672251994
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2251,16 +2352,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0a3ee9eb7890f40afdb2070c13d5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parryWindow: 0.15
+  parryWindow: 1
   kind: 1
   parryVFX: {fileID: 0}
   parrySFX: {fileID: 0}
   spawnTime: 1
   damage: 10
-  activeTime: 1
+  activeTime: 1.25
   targetMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  meleeSound: {fileID: 8300000, guid: 03960dbb5d8d86c47add697be3bf8b37, type: 3}
+  audioSrc: {fileID: 2967011897947486833}
 --- !u!54 &5134038937462394305
 Rigidbody:
   m_ObjectHideFlags: 0

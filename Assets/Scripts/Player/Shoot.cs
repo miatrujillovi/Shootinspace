@@ -20,7 +20,6 @@ public class Shoot : MonoBehaviour
     [Header("Bala")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private AudioSource bulletAudio;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float lifetime;
     [SerializeField] private bool isExplosive;
@@ -29,6 +28,11 @@ public class Shoot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentAmmoTXT;
     [SerializeField] private TextMeshProUGUI ammoAmountTXT;
     [SerializeField] private GameObject reload;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip reloadSound;
+    [SerializeField] private AudioClip shotSound;
+    [SerializeField] private AudioSource audioSrc;
 
     private Image reloadFiller;
     private float nextFireTime = 0f;
@@ -68,6 +72,7 @@ public class Shoot : MonoBehaviour
     private void Disparar()
     {
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        if (shotSound) audioSrc?.PlayOneShot(shotSound);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -88,6 +93,7 @@ public class Shoot : MonoBehaviour
             if (ammoNeeded <= currentMagazines * maxAmmo)
             {
                 currentMagazines--;
+                if (reloadSound) audioSrc?.PlayOneShot(reloadSound);
                 currentAmmo = maxAmmo;
             }
             else

@@ -14,29 +14,16 @@ public class CombatManager : MonoBehaviour
 
     private void Update()
     {
-        bool anyInCombat = false;
-
-        foreach (var enemy in activeEnemies)
+        if (AudioManager.Instance != null && AudioManager.Instance.IsInMenu)
         {
-            if (enemy == null) continue;
-
-            if (enemy.IsInCombatState())
-            {
-                anyInCombat = true;
-                Debug.Log($"Enemy {enemy.name} está en combate ({enemy._current.GetType().Name})");
-                break;
-            }
+            AudioManager.Instance.PlayInterludeMusic();
+            return;
         }
 
-        if (anyInCombat)
-        {
-            AudioManager.Instance?.PlayFightMusic();
-        }
-        else
-        {
-            AudioManager.Instance?.PlayInterludeMusic();
-        }
+        AudioManager.Instance?.PlayFightMusic();
+
     }
+
 
 
     public void RegisterEnemy(EnemyBase e)

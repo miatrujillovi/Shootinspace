@@ -15,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject dashIcon;
     [SerializeField] private GameObject dashFiller;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip dashSound;
+
+
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
@@ -74,11 +79,12 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(PerformDash(moveDirection));
         }
     }
-
     private IEnumerator PerformDash(Vector3 direction)
     {
         isDashing = true;
         canDash = false;
+
+        if (dashSound && audioSource) audioSource.PlayOneShot(dashSound);
 
         float startTime = Time.time;
 
@@ -92,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
+
 
     /*private IEnumerator ShowDashCooldown()
     {

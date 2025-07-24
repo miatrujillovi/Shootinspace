@@ -4,7 +4,7 @@ public class RangedEnemy : EnemyBase
 {
     [Header("Ranged")]
     public ProjectileShooter shooter;
-    public float cooldown = 1.2f;
+    public float cooldown;
 
     public override bool IsInAttackRange()
         => Vector3.Distance(transform.position, player.position) <= rangedRange;

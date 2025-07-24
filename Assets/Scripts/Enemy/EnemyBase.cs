@@ -26,6 +26,13 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private GameObject destierroUI;
     [SerializeField] private float uiActivationDistance = 5f;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField] private AudioClip stunnedSound;
+    [SerializeField] private AudioClip destierroSound;
+    [SerializeField] private AudioSource audioSrc;
+
+
     private Color originalColor;
 
     public bool stuned;
@@ -100,11 +107,9 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (stuned || isDead)
         {
-            Debug.Log($"Enemy {name} está aturdido o muerto. No puede cambiar a {next.GetType().Name}");
             return;
         }
 
-        Debug.Log($"Enemy {name} cambiando a estado {next.GetType().Name}");
         _current?.Exit(this);
         _current = next;
         _current?.Enter(this);
@@ -135,16 +140,25 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         text.SetDamage(amount);
     }
 
-    protected virtual void Morir()
+    protected virtual IEnumerator MorirCoroutine()
     {
         isDead = true;
         stuned = true;
 
         EnemyEvents.NotificarMuerte(gameObject);
         LevelManager.Instance.OnEnemyDefeated();
-        Destroy(gameObject);
         CombatManager.Instance?.UnregisterEnemy(this);
+
+        if (deathSound)
+            audioSrc?.PlayOneShot(deathSound);
+
+        if (destierroSound) audioSrc?.PlayOneShot(destierroSound);
+
+        yield return new WaitForSeconds(deathSound != null ? deathSound.length + 1.75f : 0.5f);
+
+        Destroy(gameObject);
     }
+
 
 
     private IEnumerator HandleJump(OffMeshLinkData data)
@@ -181,6 +195,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         stuned = true;
 
         enemyRenderer.material.color = Color.green;
+        if (stunnedSound) audioSrc?.PlayOneShot(stunnedSound);
 
         animator.ResetTrigger("Attacking");
         animator.SetBool("Stunned", true);
@@ -198,13 +213,11 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
     }
 
-
-
     public virtual void OnTriggerEnter(Collider other)
     {
         if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
-            Morir();
+            StartCoroutine(MorirCoroutine());
         }
     }
 
@@ -212,7 +225,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
-            Morir();
+            StartCoroutine(MorirCoroutine());
         }
     }
 

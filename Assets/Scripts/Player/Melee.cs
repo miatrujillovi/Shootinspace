@@ -9,12 +9,16 @@ public class Melee : MonoBehaviour
     [SerializeField] private float meleeCooldown = 0.5f;
     [SerializeField] private Transform attackOrigin;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip parryStartSFX;
+    [SerializeField] private AudioClip parryPerfectSFX;
+    [SerializeField] private AudioClip slashSFX;
+    [SerializeField] private AudioSource audioSrc;
+
     [Header("Parry")]
     [SerializeField] private bool canParry = true;
     [SerializeField] private float parryActiveFrames = 0.12f;   
-    [SerializeField] private float parryRadius = 3f;            
-    [SerializeField] private AudioClip parryStartSFX;
-    [SerializeField] private AudioClip parryPerfectSFX;         
+    [SerializeField] private float parryRadius = 3f;              
     [SerializeField] private ParticleSystem parrySlashVFX;    
 
     private ParticleSystem pS;
@@ -34,6 +38,7 @@ public class Melee : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && Time.time >= nextMeleeTime)
         {
             StartCoroutine(MeleeRoutine());
+            if (slashSFX) audioSrc?.PlayOneShot(slashSFX);
             nextMeleeTime = Time.time + meleeCooldown;
         }
     }

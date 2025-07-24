@@ -28,6 +28,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioMixerGroup sfxGroup;
 
     private AudioClip currentMusic;
+    public bool IsInMenu { get; set; } = false;
 
     private void Awake()
     {
@@ -54,22 +55,17 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFightMusic()
     {
-        Debug.Log("Intentando cambiar a FightMusic");
-        if (currentMusic == fightMusic)
-        {
-            Debug.Log("Ya está sonando FightMusic");
-            return;
-        }
+        if (currentMusic == fightMusic) return;
 
         musicSource.clip = fightMusic;
         musicSource.Play();
         currentMusic = fightMusic;
     }
 
-
     public void PlayInterludeMusic()
     {
         if (currentMusic == interludeMusic) return;
+
         musicSource.clip = interludeMusic;
         musicSource.Play();
         currentMusic = interludeMusic;

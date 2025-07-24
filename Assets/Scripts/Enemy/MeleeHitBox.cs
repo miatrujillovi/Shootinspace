@@ -6,9 +6,13 @@ using UnityEngine.VFX;
 public class MeleeHitbox : ParryableHitbox
 {
     [Header("Stats")]
-    [SerializeField] private float damage = 20f;
-    [SerializeField] private float activeTime = 0.15f;
+    [SerializeField] private float damage;
+    [SerializeField] private float activeTime;
     [SerializeField] private LayerMask targetMask;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip meleeSound;
+    [SerializeField] private AudioSource audioSrc;
 
     private EnemyBase _owner;
     private GameObject owner;
@@ -34,6 +38,7 @@ public class MeleeHitbox : ParryableHitbox
     IEnumerator ActiveWindow()
     {
         _col.enabled = true;
+        if (meleeSound) audioSrc?.PlayOneShot(meleeSound);
         yield return new WaitForSeconds(activeTime);
         _col.enabled = false;
     }

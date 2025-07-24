@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IDamageable
 {
@@ -11,6 +12,12 @@ public class Health : MonoBehaviour, IDamageable
     [Space]
     [Header("References for UI")]
     [SerializeField] private Image hpFiller;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioClip deathSound;
+
 
     //Invincibility at the start of the game
     private float spawnInvincibilityTime = 1f;
@@ -29,24 +36,29 @@ public class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount)
     {
-        if (Time.time - spawnTime < spawnInvincibilityTime) return; //Invulnerable al inicio por 1s
+        if (Time.time - spawnTime < spawnInvincibilityTime) return;
 
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
         hpFiller.fillAmount = currentHealth / maxHealth;
 
-        //Logic for Player Regeneration
+        if (damageSound && audioSource) audioSource.PlayOneShot(damageSound);
+
+        // Lógica de regeneración
         if (playerRegeneration != null)
         {
             StopCoroutine(playerRegeneration);
         }
-
         playerRegeneration = StartCoroutine(RegenerateHealth());
 
-        if (currentHealth <= 0) {
+        if (currentHealth <= 0)
+        {
+            if (deathSound && audioSource) audioSource.PlayOneShot(deathSound);
+
             LevelManager.Instance.PlayerDeath();
         }
     }
+
 
     public void TakeDamage(float amount, Vector3 hitPoint)
     {

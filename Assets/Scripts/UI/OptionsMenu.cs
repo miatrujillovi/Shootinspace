@@ -13,10 +13,10 @@ public class OptionsMenu : MonoBehaviour
 
     private void Start()
     {
-        masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 0.75f);
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
-        sensitivitySlider.value = PlayerPrefs.GetFloat("MouseSensitivity", 100f);
+        masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
+        sensitivitySlider.value = PlayerPrefs.GetFloat("MouseSensitivity", 500f);
 
         ApplySettings();
         audioMixer.GetFloat("MasterVolume", out float val);
