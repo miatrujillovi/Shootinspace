@@ -38,6 +38,14 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void Restarting()
+    {
+        spawnedEnemies = 0;
+        timer = 0f;
+
+        SpawnEnemy();
+    }
+
     private void SpawnEnemy()
     {
         LevelManager.Instance.OnEnemySpawned();
