@@ -6,11 +6,8 @@ public class RestartManager : MonoBehaviour
 {
     public void RestartGame()
     {
-        Debug.Log("Restart button pressed.");
-
         if (LevelManager.Instance != null)
         {
-            Debug.Log("Calling RestartGame() on GameManager instance: " + LevelManager.Instance.GetInstanceID());
             LevelManager.Instance.RestartGame();
         }
         else

@@ -5,6 +5,7 @@ public class Menu : MonoBehaviour
 {
     [Header("Referencias")]
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject gameplayScreen;
     private bool isPaused = false;
 
     public void Update()
@@ -25,6 +26,7 @@ public class Menu : MonoBehaviour
     public void Pausar()
     {
         Time.timeScale = 0f;
+        gameplayScreen.SetActive(false);
         pauseMenuUI.SetActive(true);
         isPaused = true;
 
@@ -35,6 +37,7 @@ public class Menu : MonoBehaviour
     {
         Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);
+        gameplayScreen.SetActive(true);
         isPaused = false;
 
         AudioManager.Instance.IsInMenu = false;
