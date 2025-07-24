@@ -16,6 +16,9 @@ public class ProjectileShooter : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioSource audioSrc;
+    
+    [Header("Owner")]
+    [SerializeField] private GameObject gameObjectOwner;
 
     float _nextFireTime = 0f;
 
@@ -35,7 +38,7 @@ public class ProjectileShooter : MonoBehaviour
             : Instantiate(projectilePrefab, firePoint.position, Quaternion.LookRotation(dir));
 
 
-        proj.Init(dir * projectileSpeed, damage, gameObject);
+        proj.Init(dir * projectileSpeed, damage, gameObjectOwner);
 
         if (shootSound) audioSrc?.PlayOneShot(shootSound);
 

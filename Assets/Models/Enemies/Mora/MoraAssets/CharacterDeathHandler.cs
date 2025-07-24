@@ -21,6 +21,10 @@ public class CharacterDeathHandler : MonoBehaviour
     private Material[] materials;
     private Color[] originalColors;
 
+    [Header("Shaders")]
+    public Shader fadeShader;
+
+
     void Start()
     {
         SetRagdoll(false);
@@ -50,19 +54,23 @@ public class CharacterDeathHandler : MonoBehaviour
             {
                 if (mat.HasProperty("_Surface"))
                 {
-                    mat.SetFloat("_Surface", 1f);                                                      
-                    mat.SetOverrideTag("RenderType", "Transparent");                                  
-                    mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;            
-                    mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);           
-                    mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);   
-                    mat.SetInt("_ZWrite", 0);                                                       
-                    mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");                                   
+                    if (fadeShader != null)
+                    {
+                        mat.shader = fadeShader;
+                    }
+
+                    mat.SetOverrideTag("RenderType", "Transparent");
+                    mat.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+                    mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    mat.SetInt("_ZWrite", 0);
+                    mat.EnableKeyword("_ALPHABLEND_ON");
+                    mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
                     mat.DisableKeyword("_SURFACE_TYPE_OPAQUE");
                 }
                 mats.Add(mat);
             }
         }
-
 
         materials = mats.ToArray();
         originalColors = new Color[materials.Length];
@@ -78,6 +86,7 @@ public class CharacterDeathHandler : MonoBehaviour
 
         StartCoroutine(FadeAfterDelay());
     }
+
 
     void SetRagdoll(bool state)
     {

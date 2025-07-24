@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,7 +32,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private AudioClip stunnedSound;
     [SerializeField] private AudioClip destierroSound;
     [SerializeField] private AudioSource audioSrc;
-
 
     private Color originalColor;
 
@@ -115,8 +115,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         _current?.Enter(this);
     }
 
-
-
     public virtual void TakeDamage(float amount)
     {
         ShowDamageText(amount);
@@ -152,14 +150,20 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (deathSound)
             audioSrc?.PlayOneShot(deathSound);
 
-        if (destierroSound) audioSrc?.PlayOneShot(destierroSound);
+        if (destierroSound)
+            audioSrc?.PlayOneShot(destierroSound);
 
-        yield return new WaitForSeconds(deathSound != null ? deathSound.length + 1.75f : 0.5f);
+        if (deathHandler != null)
+        {
+            deathHandler.Die();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
-        Destroy(gameObject);
+        yield return new WaitForSeconds(deathSound != null ? deathSound.length + 0.5f : 0.5f);
     }
-
-
 
     private IEnumerator HandleJump(OffMeshLinkData data)
     {
@@ -213,7 +217,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
@@ -221,7 +225,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         }
     }
 
-    public virtual void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {

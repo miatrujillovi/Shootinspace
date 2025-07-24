@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyMelee
       objectReference: {fileID: 0}
+    - target: {fileID: 104820768514732991, guid: cf932e767562c98498d04e12142e33db, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 159784465627047748, guid: cf932e767562c98498d04e12142e33db, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -147,6 +151,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 599879548943255528, guid: cf932e767562c98498d04e12142e33db, type: 3}
+      propertyPath: fadeDelay
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 599879548943255528, guid: cf932e767562c98498d04e12142e33db, type: 3}
+      propertyPath: fadeSpeed
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 599879548943255528, guid: cf932e767562c98498d04e12142e33db, type: 3}
+      propertyPath: fadeShader
+      value: 
+      objectReference: {fileID: -6465566751694194690, guid: 2c6e52535f17dfc4b8e0bb3d1e91aea4, type: 3}
     - target: {fileID: 738508165877278981, guid: cf932e767562c98498d04e12142e33db, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -237,6 +253,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 104820768514732991, guid: cf932e767562c98498d04e12142e33db, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3058246971396595530}
+    - targetCorrespondingSourceObject: {fileID: 104820768514732991, guid: cf932e767562c98498d04e12142e33db, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5393822892016143804}
     - targetCorrespondingSourceObject: {fileID: 5713062915702559651, guid: cf932e767562c98498d04e12142e33db, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4566833539222216470}
@@ -541,6 +560,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &5393822892016143804
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6172319069491615054}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.82
+  m_Height: 0.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!114 &6669599977683378457 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 599879548943255528, guid: cf932e767562c98498d04e12142e33db, type: 3}

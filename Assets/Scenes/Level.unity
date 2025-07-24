@@ -22179,16 +22179,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - prefab: {fileID: 1533886252818063799, guid: f82a0336b897f884c86493040221ae82, type: 3}
-    weight: 0
+    weight: 40
   - prefab: {fileID: 2366213281879261974, guid: 14fb5e7eb0b783e4694f09e6ad7893e5, type: 3}
-    weight: 100
+    weight: 5
   - prefab: {fileID: 6172319069491615054, guid: a1769aa965276af48a733a7b641a4422, type: 3}
-    weight: 0
+    weight: 55
   center: {x: 20.45, y: 2.18, z: 19.05}
   spawnRadius: 18
   maxNavSampleDistance: 2
   spawnInterval: 1
-  maxEnemies: 3
+  maxEnemies: 5
 --- !u!4 &1148484771
 Transform:
   m_ObjectHideFlags: 0

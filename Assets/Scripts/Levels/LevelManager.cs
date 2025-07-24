@@ -69,7 +69,11 @@ public class LevelManager : MonoBehaviour
         playerCamaraScript.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        Time.timeScale = 0f;
+        AudioManager.Instance.IsInMenu = true;
     }
+
 
     //When player takes the fuel on the level (CAN ONLY HAPPEN WHEN ALL ENEMIES IN LEVEL HAVE BEEN DEFEATED)
     public void FuelRecovered()
@@ -145,5 +149,8 @@ public class LevelManager : MonoBehaviour
         playerCamaraScript.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        Time.timeScale = 0f;
+        AudioManager.Instance.IsInMenu = true;
     }
 }
