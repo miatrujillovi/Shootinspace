@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 public class Camara : MonoBehaviour
@@ -18,7 +19,10 @@ public class Camara : MonoBehaviour
 
     private void Update()
     {
-        Look();
+        if (AudioManager.Instance.IsInMenu == false)
+        {
+            Look();
+        }
     }
 
     private void Look()
