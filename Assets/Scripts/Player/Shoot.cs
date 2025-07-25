@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Shoot : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class Shoot : MonoBehaviour
     [SerializeField] private AudioClip reloadSound;
     [SerializeField] private AudioClip shotSound;
     [SerializeField] private AudioSource audioSrc;
+
+    [Header("Arma Model for Anim")]
+    [SerializeField] private Transform weaponModel;
 
     private Image reloadFiller;
     private float nextFireTime = 0f;
@@ -80,6 +84,9 @@ public class Shoot : MonoBehaviour
         }
         Destroy(bullet, lifetime);
         currentAmmo--;
+
+        //Recoil Animation
+        weaponModel.DOLocalMoveZ(-0.1f, 0.08f).SetRelative().SetLoops(2, LoopType.Yoyo);
     }
 
     private IEnumerator Recargar()

@@ -6,15 +6,31 @@ using System.Collections;
 
 public class ScenesManager : MonoBehaviour
 {
+    [Header("References for Play Button")]
     [SerializeField] private GameObject spaceShip;
     [SerializeField] private CinemachineCamera cam;
     [SerializeField] private Transform camTransform;
-    [SerializeField] private GameObject mainMenuScreen;
+    [SerializeField] private RectTransform mainMenuScreen;
     [SerializeField] private GameObject estela;
- 
+    [Space]
+    [Header("References for Options & Credits")]
+    [SerializeField] private RectTransform creditsPanel;
+    [SerializeField] private RectTransform optionsPanel;
+
+    private Vector3 targetPositionMainMenu = new Vector3(-200f, 0f, 0f);
+
+    //Panels internal logic
+    private bool panelActive = false;
+    private Vector3 initialPositionPanels = new Vector3(40f, 0.1452f, 0f);
+    private Vector3 targetPositionPanels = new Vector3(12.45f, 0.1452f, 0f);
+
     public void StartGame()
     {
-        mainMenuScreen.SetActive(false);
+        creditsPanel.gameObject.SetActive(false);
+        optionsPanel.gameObject.SetActive(false);
+        mainMenuScreen.DOLocalMove(targetPositionMainMenu, 1f).SetEase(Ease.InOutSine).OnComplete(() => {
+            mainMenuScreen.gameObject.SetActive(false);
+        });
         estela.SetActive(true);
         StartCoroutine("StartCinematic");
     }
@@ -32,6 +48,34 @@ public class ScenesManager : MonoBehaviour
 
         SceneManager.LoadScene("Level");
         yield return new WaitForSeconds(0.1f);
+    }
+
+    public void CreditsButton()
+    {
+        if (!panelActive)
+        {
+            creditsPanel.DOLocalMove(targetPositionPanels, 1f).SetEase(Ease.InOutSine);
+            panelActive = true;
+        }
+        else if (panelActive) 
+        {
+            creditsPanel.DOLocalMove(initialPositionPanels, 1f).SetEase(Ease.InOutSine);
+            panelActive = false;
+        }
+    }
+
+    public void OptionsButton()
+    {
+        if (!panelActive)
+        {
+            optionsPanel.DOLocalMove(targetPositionPanels, 1f).SetEase(Ease.InOutSine);
+            panelActive = true;
+        }
+        else if (panelActive)
+        {
+            optionsPanel.DOLocalMove(initialPositionPanels, 1f).SetEase(Ease.InOutSine);
+            panelActive = false;
+        }
     }
 
     public void ExitGame()

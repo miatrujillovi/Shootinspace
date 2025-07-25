@@ -48,9 +48,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _AnimOn: 1
-    - _Colorize: 0.83
+    - _Colorize: 1.15
     - _D1Distort: 0.15
-    - _D1I: 1
+    - _D1I: 0
     - _D1Scale: 2
     - _D1Size: 2
     - _D1Speed: 2

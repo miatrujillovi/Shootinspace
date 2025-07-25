@@ -35,7 +35,9 @@ public class OptionsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("MasterVolume", masterSlider.value);
         PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
         PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
-        PlayerPrefs.SetFloat("MouseSensitivity", sensitivitySlider.value);
+        float scaledValue = sensitivitySlider.value * 300f;
+        PlayerPrefs.SetFloat("MouseSensitivity", scaledValue);
+        
     }
 
     public void SetVolume(string exposedParam, float sliderValue)

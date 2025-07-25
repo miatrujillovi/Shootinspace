@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using Microsoft.Unity.VisualStudio.Editor;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,8 +12,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashForce;
     [SerializeField] private float dashDuration;
     [SerializeField] private float dashCooldown;
-    [SerializeField] private GameObject dashIcon;
-    [SerializeField] private GameObject dashFiller;
+    [SerializeField] private Image dashIcon;
+    [SerializeField] private Image dashFiller;
+    [SerializeField] private Color disabledColor;
+    [SerializeField] private Color enabledColor = Color.white;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
@@ -28,16 +30,11 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isDashing = false;
     private bool canDash = true;
-    private Image dashIconImage;
-    private Image dashFillerImage;
 
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        //dashIconImage = dashIcon.GetComponent<Image>();
-        //dashFillerImage = dashFiller.GetComponent<Image>();
-
     }
 
     private void Update()
@@ -95,13 +92,26 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isDashing = false;
+        StartCoroutine(DashCooldownUI());
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
 
-
-    /*private IEnumerator ShowDashCooldown()
+    private IEnumerator DashCooldownUI()
     {
-        dashFillerImage.
-    }*/
+        dashFiller.gameObject.SetActive(true);
+        dashFiller.fillAmount = 0f;
+
+        float timer = 0f;
+
+        while (timer < dashCooldown)
+        {
+            timer += Time.deltaTime;
+            dashFiller.fillAmount = timer / dashCooldown;
+            yield return null;
+        }
+
+        dashFiller.fillAmount = 0f;
+        dashFiller.gameObject.SetActive(false);
+    }
 }
