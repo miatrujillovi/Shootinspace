@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] [Tooltip("Canvas with the win UI elements.")] private GameObject winScreen;
     [SerializeField] [Tooltip("Canvas with the lose UI elements")] private GameObject deathScreen;
     [SerializeField] [Tooltip("Camara script of the Player to stop it during death and win screens.")] private Camara playerCamaraScript;
+    [SerializeField] private Camera playerCamera;
     [SerializeField] [Tooltip("List of existing enemy spawners per level.")] private List<EnemySpawner> levelSpawners;
 
     [HideInInspector] public bool isFuelUnlocked = false;
@@ -152,5 +153,21 @@ public class LevelManager : MonoBehaviour
 
         Time.timeScale = 0f;
         AudioManager.Instance.IsInMenu = true;
+    }
+
+    public void TriggerShake()
+    {
+        Quaternion originalRotation = playerCamera.transform.rotation;
+
+        playerCamera.transform.DOComplete();
+
+        playerCamera.transform
+            .DOShakeRotation(0.5f, 5f, 10, 90f)
+            .SetEase(Ease.OutQuad)
+            .SetUpdate(false)
+            .OnComplete(() =>
+            {
+                playerCamera.transform.rotation = originalRotation;
+            });
     }
 }

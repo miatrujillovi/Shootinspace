@@ -77,6 +77,8 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  meleeSound: {fileID: 0}
+  audioSrc: {fileID: 0}
 --- !u!54 &6189115716200407760
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -296,6 +298,11 @@ MonoBehaviour:
   deathHandler: {fileID: 0}
   destierroUI: {fileID: 9082139516844537003}
   uiActivationDistance: 5
+  durationFreeze: 2
+  deathSound: {fileID: 0}
+  stunnedSound: {fileID: 0}
+  destierroSound: {fileID: 0}
+  audioSrc: {fileID: 0}
   stuned: 0
   melee: {fileID: 3865774423490643748}
   cooldown: 1.1

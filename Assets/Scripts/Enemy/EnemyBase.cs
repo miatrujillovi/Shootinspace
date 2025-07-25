@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
@@ -221,6 +223,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
+            LevelManager.Instance.TriggerShake();
             StartCoroutine(MorirCoroutine());
         }
     }
@@ -229,6 +232,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     {
         if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
         {
+            LevelManager.Instance.TriggerShake();
             StartCoroutine(MorirCoroutine());
         }
     }

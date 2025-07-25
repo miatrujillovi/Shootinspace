@@ -245,6 +245,11 @@ MonoBehaviour:
   deathHandler: {fileID: 0}
   destierroUI: {fileID: 7178746762083014244}
   uiActivationDistance: 5
+  durationFreeze: 2
+  deathSound: {fileID: 0}
+  stunnedSound: {fileID: 0}
+  destierroSound: {fileID: 0}
+  audioSrc: {fileID: 0}
   stuned: 0
   shooter: {fileID: 9157921181619562783}
   cooldown: 1.2
@@ -399,9 +404,9 @@ MonoBehaviour:
   damage: 5
   fireCooldown: 0.75
   spreadAngle: 1.5
-  muzzleFlash: {fileID: 0}
-  shotSFX: {fileID: 0}
+  shootSound: {fileID: 0}
   audioSrc: {fileID: 0}
+  gameObjectOwner: {fileID: 0}
 --- !u!1001 &305496862255203005
 PrefabInstance:
   m_ObjectHideFlags: 0
