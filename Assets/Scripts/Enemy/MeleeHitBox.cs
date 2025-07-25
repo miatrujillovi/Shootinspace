@@ -45,37 +45,21 @@ public class MeleeHitbox : ParryableHitbox
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Entró en el trigger con: {other.name}");
-
-        // Ignorar si es el dueño (por jerarquía)
-        if (other.transform.root.gameObject == owner)
+        if (other.transform.root.gameObject == owner || other.CompareTag("Enemy"))
         {
-            Debug.Log("Es el dueño (root), ignorando.");
             return;
         }
 
-        // Verificar que esté en la capa correcta
-        if ((targetMask.value & (1 << other.gameObject.layer)) == 0)
-        {
-            Debug.Log("No es un objetivo válido.");
-            return;
-        }
-
-        // Intentar aplicar daño
         if (other.TryGetComponent<IDamageable>(out var target))
         {
-            Debug.Log("Haciendo daño al objetivo.");
             target.TakeDamage(damage, transform.position);
         }
 
         _col.enabled = false;
     }
 
-
-
     public override void OnParried(Vector3 dir, GameObject source, bool perfect)
     {
         _col.enabled = false;
     }
-
 }

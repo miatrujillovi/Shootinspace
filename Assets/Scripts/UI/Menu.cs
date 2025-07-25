@@ -1,5 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 public class Menu : MonoBehaviour
 {
@@ -29,6 +31,8 @@ public class Menu : MonoBehaviour
         gameplayScreen.SetActive(false);
         pauseMenuUI.SetActive(true);
         isPaused = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         AudioManager.Instance.IsInMenu = true;
     }
@@ -39,6 +43,8 @@ public class Menu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         gameplayScreen.SetActive(true);
         isPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         AudioManager.Instance.IsInMenu = false;
     }
