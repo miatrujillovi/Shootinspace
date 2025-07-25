@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 6857882560186648006}
   - component: {fileID: 7801726469975685957}
   - component: {fileID: 4957563830318663815}
+  - component: {fileID: 2572315839285903872}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -456,20 +457,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 10
   reloadTime: 2
-  shotCooldown: 0.3
+  shotCooldown: 0.2
   maxAmmo: 40
   currentAmmo: 0
-  maxMagazines: 5
+  maxMagazines: 10000
   currentMagazines: 0
   bulletPrefab: {fileID: 6048309155353522950, guid: d6e637fd5a0083d4abac94e418e202f7, type: 3}
   bulletSpawnPoint: {fileID: 4659150145369808677}
-  bulletAudio: {fileID: 0}
   bulletSpeed: 50
   lifetime: 2.5
   isExplosive: 0
   currentAmmoTXT: {fileID: 0}
   ammoAmountTXT: {fileID: 0}
   reload: {fileID: 0}
+  reloadSound: {fileID: 8300000, guid: a89da59bc08643440a98d19233070687, type: 3}
+  shotSound: {fileID: 8300000, guid: b59253444f002344f96210db1e7363c7, type: 3}
+  audioSrc: {fileID: 2572315839285903872}
+  weaponModel: {fileID: 5862097465115265267}
 --- !u!114 &5574393317371539051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,6 +493,8 @@ MonoBehaviour:
   dashCooldown: 5
   dashIcon: {fileID: 0}
   dashFiller: {fileID: 0}
+  audioSource: {fileID: 2572315839285903872}
+  dashSound: {fileID: 8300000, guid: d3449e98be8673b4491454ff30bea95a, type: 3}
 --- !u!114 &1053184008620375526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,11 +511,13 @@ MonoBehaviour:
   meleeAttackDistance: 2
   meleeCooldown: 1
   attackOrigin: {fileID: 8998692329739385604}
+  parryStartSFX: {fileID: 0}
+  parryPerfectSFX: {fileID: 0}
+  slashSFX: {fileID: 8300000, guid: 7c717a806b7c7bc4383e3a31fc946360, type: 3}
+  audioSrc: {fileID: 2572315839285903872}
   canParry: 1
   parryActiveFrames: 0.12
   parryRadius: 3
-  parryStartSFX: {fileID: 0}
-  parryPerfectSFX: {fileID: 0}
   parrySlashVFX: {fileID: 0}
 --- !u!114 &6857882560186648006
 MonoBehaviour:
@@ -526,6 +534,9 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   hpFiller: {fileID: 0}
+  audioSource: {fileID: 2572315839285903872}
+  damageSound: {fileID: 8300000, guid: bd865a57440f636428077c84ca54caa9, type: 3}
+  deathSound: {fileID: 8300000, guid: 2263943eaada1234eb192d64bdac837e, type: 3}
 --- !u!136 &7801726469975685957
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -574,6 +585,103 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &2572315839285903872
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8658620450730286438}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &4378748852042044050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -743,10 +851,32 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: fa8fffc3e31ce254494de21bd166f67b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4659150145369808677}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fa8fffc3e31ce254494de21bd166f67b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3554822050988657094}
   m_SourcePrefab: {fileID: 100100000, guid: fa8fffc3e31ce254494de21bd166f67b, type: 3}
 --- !u!4 &5862097465115265267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fa8fffc3e31ce254494de21bd166f67b, type: 3}
   m_PrefabInstance: {fileID: 6255750470276787992}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6490120517253173833 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fa8fffc3e31ce254494de21bd166f67b, type: 3}
+  m_PrefabInstance: {fileID: 6255750470276787992}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3554822050988657094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6490120517253173833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529030b320017bc4aa8d34981539416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swayAmount: 0.05
+  swaySpeed: 1

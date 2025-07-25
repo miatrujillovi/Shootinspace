@@ -14,8 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashCooldown;
     [SerializeField] private Image dashIcon;
     [SerializeField] private Image dashFiller;
-    [SerializeField] private Color disabledColor;
-    [SerializeField] private Color enabledColor = Color.white;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
