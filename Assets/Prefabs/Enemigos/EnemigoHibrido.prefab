@@ -208,11 +208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5d2db01b3b6d469b831dd396072d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1289444709093748691 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7178746762083014244, guid: 7065deca2428c8b408da42eed332e278, type: 3}
-  m_PrefabInstance: {fileID: 8234004006481672631}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &5476602924527524287 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4487206266978934792, guid: 7065deca2428c8b408da42eed332e278, type: 3}
@@ -257,9 +252,8 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
   enemyRenderer: {fileID: 5476602924527524287}
   deathHandler: {fileID: 0}
-  destierroUI: {fileID: 1289444709093748691}
+  destierroUI: {fileID: 0}
   uiActivationDistance: 5
-  durationFreeze: 2
   deathSound: {fileID: 0}
   stunnedSound: {fileID: 0}
   destierroSound: {fileID: 0}

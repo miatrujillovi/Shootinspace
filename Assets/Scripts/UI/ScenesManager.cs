@@ -16,7 +16,6 @@ public class ScenesManager : MonoBehaviour
     [Header("References for Options & Credits")]
     [SerializeField] private RectTransform creditsPanel;
     [SerializeField] private RectTransform optionsPanel;
-
     private Vector3 targetPositionMainMenu = new Vector3(-200f, 0f, 0f);
 
     //Panels internal logic

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,7 +27,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private CharacterDeathHandler deathHandler;
 
     [Header("UI Destierro")]
-    [SerializeField] private GameObject destierroUI;
+    //private TextMeshProUGUI destierroUI;
     [SerializeField] private float uiActivationDistance = 5f;
 
     [Header("Sounds")]
@@ -56,8 +57,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        if (destierroUI != null)
-            destierroUI.SetActive(false);
+        /*if (destierroUI != null)
+            destierroUI.gameObject.SetActive(false);*/
 
         SwitchState(chase);
 
@@ -69,21 +70,19 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         CombatManager.Instance?.RegisterEnemy(this);
     }
 
-
     protected virtual void Update()
     {
-        if (destierroUI != null)
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        //Debug.Log("Stunneado: " + stuned + ". Distancia con el Jugador: " + distanceToPlayer);
+
+        if (stuned && distanceToPlayer <= uiActivationDistance)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-            bool shouldShowUI = stuned && distanceToPlayer <= uiActivationDistance;
-            destierroUI.SetActive(shouldShowUI);
-
-            if (shouldShowUI)
-            {
-                destierroUI.transform.LookAt(player);
-                destierroUI.transform.Rotate(0, 180, 0); 
-            }
+            UIManager.Instance.ExileEnemy();
+        }
+        else
+        {
+            UIManager.Instance.HideExileEnemy();
         }
 
         if (agent.isOnOffMeshLink && !isJumping)

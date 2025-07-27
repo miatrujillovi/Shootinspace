@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        LevelManager.Instance.OnEnemySpawned();
+        LevelManager.Instance.OnEnemySpawned(maxEnemies);
         GameObject selectedPrefab = GetRandomEnemyByWeight();
 
         Vector3 randomPosition;

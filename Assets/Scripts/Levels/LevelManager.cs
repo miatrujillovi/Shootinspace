@@ -80,15 +80,16 @@ public class LevelManager : MonoBehaviour
     public void FuelRecovered()
     {
         recoveredFuel++;
-        Debug.Log("Current Fuel: " + recoveredFuel);
         currentLevel++;
-        Debug.Log("Current Level: " + currentLevel);
+        UIManager.Instance.HideFuel();
         NextLevel(currentLevel);
     }
 
     //Function to change things onto NextLevel
     public void NextLevel(int _nextLevel)
     {
+        UIManager.Instance.HideFuel();
+
         if (_nextLevel > levelStartLocation.Length)
         {
             return;
@@ -118,9 +119,13 @@ public class LevelManager : MonoBehaviour
     }
 
     //If a enemy spawns, add to the counter of enemiesRemaining
-    public void OnEnemySpawned()
+    public void OnEnemySpawned(int enemyAmount)
     {
-        enemiesRemaining++;
+        if (enemiesRemaining != enemyAmount)
+        {
+            enemiesRemaining++;
+        }
+        
     }
 
     //If a enemy dies, substracts from enemiesRemaining and verifies if its 0 to unlock fuel
@@ -128,8 +133,9 @@ public class LevelManager : MonoBehaviour
     {
         enemiesRemaining--;
 
-        if (enemiesRemaining <= 0)
+        if (enemiesRemaining == 0)
         {
+            UIManager.Instance.CollectFuel();
             isFuelUnlocked = true;
         }
     }

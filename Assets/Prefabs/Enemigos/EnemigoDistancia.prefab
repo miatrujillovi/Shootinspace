@@ -243,9 +243,8 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 3935702670760134713, guid: e1599dd941d9f1547b1342b59f6407c5, type: 3}
   enemyRenderer: {fileID: 4487206266978934792}
   deathHandler: {fileID: 0}
-  destierroUI: {fileID: 7178746762083014244}
+  destierroUI: {fileID: 0}
   uiActivationDistance: 5
-  durationFreeze: 2
   deathSound: {fileID: 0}
   stunnedSound: {fileID: 0}
   destierroSound: {fileID: 0}
@@ -511,10 +510,5 @@ PrefabInstance:
 --- !u!224 &6663648648832011091 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6361157336040671726, guid: 06d875f2fac35104ba52d6b161e6bf5e, type: 3}
-  m_PrefabInstance: {fileID: 305496862255203005}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7178746762083014244 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7466229182268593369, guid: 06d875f2fac35104ba52d6b161e6bf5e, type: 3}
   m_PrefabInstance: {fileID: 305496862255203005}
   m_PrefabAsset: {fileID: 0}

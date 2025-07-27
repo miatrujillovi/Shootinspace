@@ -65,10 +65,16 @@ public class Shoot : MonoBehaviour
             nextFireTime = Time.time + shotCooldown;
         }
 
+        if (currentAmmo == 0)
+        {
+            UIManager.Instance.NeedReload();
+        }
+
         if (Input.GetKeyDown(KeyCode.R) && currentAmmo < maxAmmo && currentMagazines > 0)
         {
             StartCoroutine(Recargar());
             StartCoroutine(ShowReloadUI());
+            UIManager.Instance.HideReload();
         }
     }
 
