@@ -23,10 +23,9 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector] public bool isFuelUnlocked = false;
     [HideInInspector] public bool hasTriggered = false;
-    private int enemiesRemaining;
+    public int enemiesRemaining;
     private int recoveredFuel;
     private int currentLevel;
-
     private void Awake()
     {
         if (Instance == null)
@@ -98,7 +97,6 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        enemiesRemaining = 0;
         isFuelUnlocked = false;
         hasTriggered = false;
 
@@ -107,8 +105,12 @@ public class LevelManager : MonoBehaviour
             spawner.gameObject.SetActive(false);
         }
 
-        levelSpawners[_nextLevel - 1].gameObject.SetActive(true);
-        levelSpawners[_nextLevel - 1].Restarting();
+        // Activamos el spawner del nivel actual
+        EnemySpawner currentSpawner = levelSpawners[_nextLevel - 1];
+        currentSpawner.gameObject.SetActive(true);
+        currentSpawner.Restarting();
+
+        enemiesRemaining = currentSpawner.maxEnemies;
 
         LevelTransition(levelStartLocation[_nextLevel - 1]);
     }
@@ -119,16 +121,6 @@ public class LevelManager : MonoBehaviour
         playerCR.enabled = false;
         player.position = newPosition;
         playerCR.enabled = true;
-    }
-
-    //If a enemy spawns, add to the counter of enemiesRemaining
-    public void OnEnemySpawned(int enemyAmount)
-    {
-        if (enemiesRemaining != enemyAmount)
-        {
-            enemiesRemaining++;
-        }
-        
     }
 
     //If a enemy dies, substracts from enemiesRemaining and verifies if its 0 to unlock fuel

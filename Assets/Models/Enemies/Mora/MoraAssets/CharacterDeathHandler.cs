@@ -117,6 +117,7 @@ public class CharacterDeathHandler : MonoBehaviour
             }
             yield return null;
         }
+        LevelManager.Instance.OnEnemyDefeated();
         Destroy(gameObject);
     }
 }

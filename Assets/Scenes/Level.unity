@@ -26825,7 +26825,7 @@ MonoBehaviour:
   center: {x: 20.45, y: 2.18, z: 19.05}
   spawnRadius: 18
   maxNavSampleDistance: 2
-  spawnInterval: 0.01
+  spawnInterval: 1
   maxEnemies: 12
 --- !u!4 &1148484771
 Transform:

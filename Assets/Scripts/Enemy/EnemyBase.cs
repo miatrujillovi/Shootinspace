@@ -46,7 +46,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     private bool isJumping;
     public readonly ChaseState chase = new ChaseState();
     public virtual AttackState attack { get; protected set; } = new AttackState();
-
+    private bool playerInsideTrigger = false;
 
     protected virtual void Awake() => vidaActual = vidaMax;
 
@@ -73,17 +73,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected virtual void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        //Debug.Log("Stunneado: " + stuned + ". Distancia con el Jugador: " + distanceToPlayer);
-
-        if (stuned && distanceToPlayer <= uiActivationDistance)
-        {
-            UIManager.Instance.ExileEnemy();
-        }
-        else
-        {
-            UIManager.Instance.HideExileEnemy();
-        }
 
         if (agent.isOnOffMeshLink && !isJumping)
         {
@@ -145,7 +134,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         stuned = true;
 
         EnemyEvents.NotificarMuerte(gameObject);
-        LevelManager.Instance.OnEnemyDefeated();
         CombatManager.Instance?.UnregisterEnemy(this);
 
         if (deathSound)
@@ -220,20 +208,52 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public void OnTriggerEnter(Collider other)
     {
-        if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
+        if (!other.CompareTag("Player")) return;
+
+        playerInsideTrigger = true;
+
+        if (stuned)
         {
-            LevelManager.Instance.TriggerShake();
-            StartCoroutine(MorirCoroutine());
+            UIManager.Instance.ExileEnemy();
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                LevelManager.Instance.TriggerShake();
+                StartCoroutine(MorirCoroutine());
+            }
+        }
+        else
+        {
+            UIManager.Instance.HideExileEnemy();
         }
     }
 
     public void OnTriggerStay(Collider other)
     {
-        if (stuned && other.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.E))
+        if (!other.CompareTag("Player")) return;
+
+        if (stuned)
         {
-            LevelManager.Instance.TriggerShake();
-            StartCoroutine(MorirCoroutine());
+            UIManager.Instance.ExileEnemy();
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                LevelManager.Instance.TriggerShake();
+                StartCoroutine(MorirCoroutine());
+            }
         }
+        else
+        {
+            UIManager.Instance.HideExileEnemy();
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        playerInsideTrigger = false;
+        UIManager.Instance.HideExileEnemy();
     }
 
     public abstract bool IsInAttackRange();
