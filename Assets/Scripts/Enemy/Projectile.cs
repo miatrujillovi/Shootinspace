@@ -40,10 +40,9 @@ public class Projectile : ParryableHitbox
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == _owner)
+        if (collision.gameObject == _owner || collision.gameObject.CompareTag("Enemy"))
             return;
 
-        // Use GetComponent instead of TryGetComponent since Collision does not have TryGetComponent
         var target = collision.gameObject.GetComponent<IDamageable>();
         if (target != null)
             target.TakeDamage(_damage, transform.position);

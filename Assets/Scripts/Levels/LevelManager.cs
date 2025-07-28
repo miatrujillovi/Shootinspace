@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] [Tooltip("Canvas with the win UI elements.")] private GameObject winScreen;
     [SerializeField] [Tooltip("Canvas with the lose UI elements")] private GameObject deathScreen;
     [SerializeField] [Tooltip("Camara script of the Player to stop it during death and win screens.")] private Camara playerCamaraScript;
+    [SerializeField] private Health playerHealth;
     [SerializeField] private Camera playerCamera;
     [SerializeField] [Tooltip("List of existing enemy spawners per level.")] private List<EnemySpawner> levelSpawners;
 
@@ -50,13 +51,16 @@ public class LevelManager : MonoBehaviour
         isFuelUnlocked = false;
         hasTriggered = false;
 
+        playerHealth.RestoreHealth();
+
         //Restarting UI/Screen Logic
         winScreen.SetActive(false);
         deathScreen.SetActive(false);
         gameplayScreen.SetActive(true);
 
         //Restarting Player Logic
-        playerCamaraScript.enabled = true;
+
+        AudioManager.Instance.IsInMenu = false;
 
         //Restarting
         NextLevel(currentLevel);
@@ -67,7 +71,6 @@ public class LevelManager : MonoBehaviour
     {
         gameplayScreen.SetActive(false);
         deathScreen.SetActive(true);
-        playerCamaraScript.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
@@ -153,7 +156,6 @@ public class LevelManager : MonoBehaviour
     private void PlayerHasWon()
     {
         winScreen.SetActive(true);
-        playerCamaraScript.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 

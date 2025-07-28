@@ -1,4 +1,3 @@
-using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 public class Camara : MonoBehaviour
@@ -7,19 +6,19 @@ public class Camara : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     private float rotationSensibility;
-
     private float cameraVerticalAngle;
     private Vector3 rotationinput = Vector3.zero;
 
     private void Awake()
     {
         playerCamera = Camera.main;
-        rotationSensibility = PlayerPrefs.GetFloat("MouseSensitivity", 100f);
+        GameSettings settings = SettingsManager.Load();
+        rotationSensibility = settings.mouseSensitivity;
     }
 
     private void Update()
     {
-        if (AudioManager.Instance.IsInMenu == false)
+        if (!AudioManager.Instance.IsInMenu)
         {
             Look();
         }

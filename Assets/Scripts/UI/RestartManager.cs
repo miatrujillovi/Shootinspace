@@ -1,4 +1,3 @@
-using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +5,7 @@ public class RestartManager : MonoBehaviour
 {
     public void RestartGame()
     {
+        Time.timeScale = 1f;
         if (LevelManager.Instance != null)
         {
             LevelManager.Instance.RestartGame();
@@ -18,6 +18,7 @@ public class RestartManager : MonoBehaviour
 
     public void GoBackMainMenu()
     {
+        Time.timeScale = 1f; 
         SceneManager.LoadScene("MainMenu");
     }
 }

@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnInterval;
     [SerializeField] public int maxEnemies;
 
+    private List<GameObject> activeEnemies = new List<GameObject>();
     private int spawnedEnemies = 0;
     private float timer;
 
@@ -40,11 +41,19 @@ public class EnemySpawner : MonoBehaviour
 
     public void Restarting()
     {
+        foreach (var enemy in activeEnemies)
+        {
+            if (enemy != null)
+                Destroy(enemy);
+        }
+        activeEnemies.Clear();
+
         spawnedEnemies = 0;
         timer = 0f;
 
         SpawnEnemy();
     }
+
 
     private void SpawnEnemy()
     {
@@ -54,7 +63,8 @@ public class EnemySpawner : MonoBehaviour
         Vector3 randomPosition;
         if (GetRandomPointOnNavMesh(center, spawnRadius, out randomPosition))
         {
-            Instantiate(selectedPrefab, randomPosition, Quaternion.identity);
+            GameObject enemy = Instantiate(selectedPrefab, randomPosition, Quaternion.identity);
+            activeEnemies.Add(enemy);
             spawnedEnemies++;
         }
         else

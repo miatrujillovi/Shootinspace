@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IDamageable
 {
+
     [Header("Variables for Health")]
     [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
@@ -28,7 +29,7 @@ public class Health : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        RestoreHealth();
         spawnTime = Time.time;
     }
 
@@ -76,5 +77,11 @@ public class Health : MonoBehaviour, IDamageable
         }
 
         playerRegeneration = null;
+    }
+
+    public void RestoreHealth()
+    {
+        currentHealth = maxHealth;
+        hpFiller.fillAmount = currentHealth / maxHealth;
     }
 }

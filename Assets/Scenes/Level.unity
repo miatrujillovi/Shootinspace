@@ -26825,7 +26825,7 @@ MonoBehaviour:
   center: {x: 20.45, y: 2.18, z: 19.05}
   spawnRadius: 18
   maxNavSampleDistance: 2
-  spawnInterval: 1
+  spawnInterval: 0.01
   maxEnemies: 12
 --- !u!4 &1148484771
 Transform:
@@ -33415,6 +33415,7 @@ MonoBehaviour:
   winScreen: {fileID: 1508980362}
   deathScreen: {fileID: 917779926}
   playerCamaraScript: {fileID: 1809224465}
+  playerHealth: {fileID: 1809224470}
   playerCamera: {fileID: 845855974}
   levelSpawners:
   - {fileID: 1148484770}
@@ -44106,7 +44107,7 @@ PrefabInstance:
       objectReference: {fileID: 1799307029}
     - target: {fileID: 6857882560186648006, guid: 7a85486946993944d802f0b4609e8e8a, type: 3}
       propertyPath: maxHealth
-      value: 100000000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8658620450730286438, guid: 7a85486946993944d802f0b4609e8e8a, type: 3}
       propertyPath: m_Name
@@ -44178,6 +44179,17 @@ CharacterController:
   m_CorrespondingSourceObject: {fileID: 4957563830318663815, guid: 7a85486946993944d802f0b4609e8e8a, type: 3}
   m_PrefabInstance: {fileID: 1809224464}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1809224470 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6857882560186648006, guid: 7a85486946993944d802f0b4609e8e8a, type: 3}
+  m_PrefabInstance: {fileID: 1809224464}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf25fc6e16e8df8409dc7ace15b8dd06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1810755549
 GameObject:
   m_ObjectHideFlags: 0
