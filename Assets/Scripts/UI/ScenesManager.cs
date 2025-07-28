@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using Unity.Cinemachine;
 using DG.Tweening;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class ScenesManager : MonoBehaviour
 {
@@ -16,6 +17,15 @@ public class ScenesManager : MonoBehaviour
     [Header("References for Options & Credits")]
     [SerializeField] private RectTransform creditsPanel;
     [SerializeField] private RectTransform optionsPanel;
+    [Space]
+    [Header("References for Story/Context")]
+    [SerializeField] private RectTransform bg;
+    [SerializeField] private RectTransform image1, image2, image3;
+    [SerializeField] private RectTransform txt1, txt2;
+    [Space]
+    [Header("References for Tutorial")]
+    [SerializeField] private GameObject loadingScreen, tutorialScreen, loadingTXT, continueBTN;
+
     private Vector3 targetPositionMainMenu = new Vector3(-200f, 0f, 0f);
 
     //Panels internal logic
@@ -45,8 +55,40 @@ public class ScenesManager : MonoBehaviour
         estela.transform.DOMove(estela.transform.position + new Vector3(400, 0, 0), 3f).SetEase(Ease.InQuad);
         yield return camTransform.DOMove(new Vector3(105.3f, 11.1f, -110.3f), 3f).SetEase(Ease.InQuint).WaitForCompletion();
 
+        StartCoroutine(ContextAnimation());
+    }
+
+    private IEnumerator ContextAnimation()
+    {
+        bg.DOScale(Vector3.one, 1f).SetEase(Ease.InSine);
+        yield return image1.DOLocalMove(new Vector3(-500f, 138f, 0f), 3f).SetEase(Ease.InOutSine).WaitForCompletion();
+        yield return image2.DOLocalMove(new Vector3(0f, -170f, 0f), 3f).SetEase(Ease.InOutSine).WaitForCompletion();
+        yield return txt1.DOLocalMove(new Vector3(0f, 450f, 0f), 3f).SetEase(Ease.InOutSine).WaitForCompletion();
+
+        yield return new WaitForSeconds(1.8f);
+
+        yield return image3.DOLocalMove(new Vector3(500f, 80f, 0f), 3f).SetEase(Ease.InOutSine).WaitForCompletion();
+        yield return txt2.DOLocalMove(new Vector3(0f, -450f, 0f), 3f).SetEase(Ease.InOutSine).WaitForCompletion();
+
+        yield return new WaitForSeconds(1.8f);
+
+        StartCoroutine(TutorialScreen());
+    }
+
+    private IEnumerator TutorialScreen()
+    {
+        loadingScreen.SetActive(false);
+        tutorialScreen.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+
+        loadingTXT.SetActive(false);
+        continueBTN.SetActive(true);
+    }
+
+    public void ContinueButton()
+    {
         SceneManager.LoadScene("Level");
-        yield return new WaitForSeconds(0.1f);
     }
 
     public void CreditsButton()

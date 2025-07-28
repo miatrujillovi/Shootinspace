@@ -218,7 +218,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
             if (Input.GetKey(KeyCode.E))
             {
-                LevelManager.Instance.TriggerShake();
+                //LevelManager.Instance.TriggerShake();
                 StartCoroutine(MorirCoroutine());
             }
         }
@@ -238,7 +238,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
             if (Input.GetKey(KeyCode.E))
             {
-                LevelManager.Instance.TriggerShake();
+                //LevelManager.Instance.TriggerShake();
                 StartCoroutine(MorirCoroutine());
             }
         }
