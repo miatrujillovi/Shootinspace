@@ -27,7 +27,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private CharacterDeathHandler deathHandler;
 
     [Header("UI Destierro")]
-    //private TextMeshProUGUI destierroUI;
     [SerializeField] private float uiActivationDistance = 5f;
 
     [Header("Sounds")]
@@ -40,6 +39,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public bool stuned;
     private bool isDead = false;
+    private CapsuleCollider[] colliders;
 
 
     public EnemyState _current;
@@ -57,8 +57,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        /*if (destierroUI != null)
-            destierroUI.gameObject.SetActive(false);*/
+        colliders = GetComponents<CapsuleCollider>();
 
         SwitchState(chase);
 
@@ -144,6 +143,12 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
         if (deathHandler != null)
         {
+            //Deactivate colliders when dying
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
+
             deathHandler.Die();
         }
         else

@@ -8,6 +8,7 @@ public class Melee : MonoBehaviour
     [SerializeField] private float meleeAttackDistance = 3f;
     [SerializeField] private float meleeCooldown = 0.5f;
     [SerializeField] private Transform attackOrigin;
+    [SerializeField] private float meleeDamage = 15f;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip parryStartSFX;
@@ -68,9 +69,9 @@ public class Melee : MonoBehaviour
                             out RaycastHit hit,
                             meleeAttackDistance))
         {
-            if (hit.collider.CompareTag("Enemy"))
+            if (hit.collider.TryGetComponent<IDamageable>(out var target))
             {
-                Debug.Log("Melee hit an enemy.");
+                target.TakeDamage(meleeDamage);
             }
 
             if (hit.collider.TryGetComponent(out IParryable parryable))
